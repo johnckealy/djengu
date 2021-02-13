@@ -23,7 +23,7 @@
                 "${workspaceFolder}/api/tests/test_plants.py"
             ],
             "env": {
-                "DJANGO_SETTINGS_MODULE": "florapi.config.settings",
+                "DJANGO_SETTINGS_MODULE": "api.config.settings",
                 "SQL_ENGINE": "django.db.backends.sqlite3",
                 "SQL_DATABASE": ":memory:"
             }

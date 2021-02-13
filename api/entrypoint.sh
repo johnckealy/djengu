@@ -14,5 +14,7 @@ then
 fi
 
 # python entry point commands go here
+python manage.py migrate
+
 
 exec "$@"

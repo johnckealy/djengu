@@ -7,12 +7,12 @@ services:
     # Main backend
     django:
         restart: always
-        build: ./florapi
+        build: ./api
         command: python manage.py runserver 0.0.0.0:8000
         ports:
             - 8000:8000
         env_file:
-            - ./config/.env.dev
+            - ./env/.env.dev
         environment:
             - SQL_HOST=db
         depends_on:
@@ -23,20 +23,18 @@ services:
     db:
         restart: always
         image: postgres:12.0-alpine
-        environment:
-            - POSTGRES_USER=jokea
-            - POSTGRES_PASSWORD=abracadabra
-            - POSTGRES_DB=flora_dev
+        env_file:
+            - ./env/.env.db
         volumes:
             - postgres_data:/var/lib/postgresql/data/
 
 
-    # Nuxt frontend app
-    nuxt:
-        build: ./frontend/
-        ports:
-            - "3000:3000"
-        env_file:
-            - ./config/.env.dev
-        command:
-            "npm run dev"
+    # # Nuxt frontend app
+    # nuxt:
+    #     build: ./frontend/
+    #     ports:
+    #         - "3000:3000"
+    #     env_file:
+    #         - ./env/.env.dev
+    #     command:
+    #         "npm run dev"

@@ -50,12 +50,11 @@ frontend-serve: env-dev
 	cd frontend && quasar dev
 
 run-django-scripts: env-dev
-	@$(IN_ENV) && python $(DJANGO_MANAGE) runscript <scriptname>
+	@$(IN_ENV) && python $(DJANGO_MANAGE) runscript create_test_users
 
 migrations: env-dev
 	$(IN_ENV) && python $(DJANGO_MANAGE) makemigrations --noinput
 	$(IN_ENV) && python $(DJANGO_MANAGE) migrate --noinput
-
 
 flush-the-database-yes-really: env-dev
 	$(IN_ENV) && python $(DJANGO_MANAGE) flush
