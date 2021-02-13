@@ -4,20 +4,20 @@ ENV_DIR=.$(PYTHON)_env
 IN_ENV=. $(ENV_DIR)/bin/activate
 
 env-dev:
-	$(eval include config/.env.dev)
-	$(eval export $(shell sed 's/=.*//' config/.env.dev))
+	$(eval include env/.env.dev)
+	$(eval export $(shell sed 's/=.*//' env/.env.dev))
 
 env-test:
-	$(eval include config/.env.test)
-	$(eval export $(shell sed 's/=.*//' config/.env.test))
+	$(eval include env/.env.test)
+	$(eval export $(shell sed 's/=.*//' env/.env.test))
 
 env-staging:
-	$(eval include config/.env.staging)
-	$(eval export $(shell sed 's/=.*//' config/.env.staging))
+	$(eval include env/.env.staging)
+	$(eval export $(shell sed 's/=.*//' env/.env.staging))
 
 env-prod:
-	$(eval include config/.env.prod)
-	$(eval export $(shell sed 's/=.*//' config/.env.prod))
+	$(eval include env/.env.prod)
+	$(eval export $(shell sed 's/=.*//' env/.env.prod))
 
 celery: env-dev
 	$(IN_ENV) && cd api && celery -A config worker --beat -l info -S django

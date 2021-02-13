@@ -1,0 +1,33 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Django",
+            "type": "python",
+            "request": "launch",
+            "envFile": "${workspaceFolder}/env/.env.dev",
+            "program": "${workspaceFolder}/api/manage.py",
+            "args": [
+                "runserver",
+                "--noreload",
+                "--nothreading"
+            ],
+            "django": true,
+        },
+        {
+            "name": "Run Unit Tests",
+            "type": "python",
+            "request": "launch",
+            "module": "pytest",
+            "args": [
+                "${workspaceFolder}/api/tests/test_plants.py"
+            ],
+            "env": {
+                "DJANGO_SETTINGS_MODULE": "florapi.config.settings",
+                "SQL_ENGINE": "django.db.backends.sqlite3",
+                "SQL_DATABASE": ":memory:"
+            }
+        },
+    ]
+}
+
