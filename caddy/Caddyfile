@@ -1,0 +1,13 @@
+
+{
+    email ${LETS_ENCRYPT_EMAIL}
+    acme_ca {$LETS_ENCRYPT_ENDPOINT}
+}
+
+{$API_URL} {
+    reverse_proxy django:8000
+}
+
+{$ORIGIN_URL}  {
+    reverse_proxy nuxt:3000
+}
