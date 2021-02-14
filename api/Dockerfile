@@ -1,30 +1,36 @@
+# pull official base image
 FROM python:3.8-slim
 
 
-# set work directory
-WORKDIR /usr/src
-
-# set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-# Postgres
 RUN apt-get update && \
-    apt-get install postgresql postgresql-contrib gcc python3-dev musl-dev postgresql-client -y
+    apt-get install postgresql postgresql-contrib gcc python3-dev musl-dev postgresql-client netcat -y
 
 RUN useradd -ms /bin/bash jokea
 
-# install dependencies
+ENV APP_HOME=/code/
+
+RUN mkdir -p $APP_HOME
+
+COPY . $APP_HOME
+
 RUN pip3 install --upgrade pip
-COPY ./requirements.txt .
-RUN pip install -r requirements.txt
 
-COPY . .
+COPY ./requirements.txt $APP_HOME
+COPY ./entrypoint.sh $APP_HOME
 
-RUN chown -R jokea:jokea .
+RUN pip3 install -r $APP_HOME/requirements.txt
+
+RUN mkdir -p $APP_HOME/staticfiles
+
+WORKDIR $APP_HOME
+
+
+RUN chown -R jokea:jokea $APP_HOME
 
 USER jokea
 
 
-ENTRYPOINT ["/usr/src/entrypoint.sh"]
-
+ENTRYPOINT ["/code/entrypoint.sh"]

@@ -1,6 +1,6 @@
 
 {
-    email ${LETS_ENCRYPT_EMAIL}
+    email {$LETS_ENCRYPT_EMAIL}
     acme_ca {$LETS_ENCRYPT_ENDPOINT}
 }
 

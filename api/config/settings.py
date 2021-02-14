@@ -11,10 +11,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'foo')
 
-DEBUG = True
+DEBUG = os.environ.get('DEBUG') == 'true'
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS').split(',')
 
 
 INSTALLED_APPS = [
@@ -145,8 +144,8 @@ SIMPLE_JWT = {
 }
 
 # Static assets
-WHITENOISE_AUTOREFRESH = True
+if DEBUG:
+    WHITENOISE_AUTOREFRESH = True
 
 # Cors
 CORS_ALLOWED_ORIGINS = [os.environ.get('ORIGIN_URL')]
-WHITENOISE_AUTOREFRESH = True

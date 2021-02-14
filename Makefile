@@ -31,7 +31,7 @@ deploy-staging: env-staging build-frontend
 	docker-compose -f docker-compose.prod.yml up --build -d
 
 docker-down: env-prod
-	docker-compose -f docker-compose.staging.yml down
+	docker-compose -f docker-compose.prod.yml down
 
 docker-logs: env-prod
 	docker-compose -f docker-compose.staging.yml logs -f

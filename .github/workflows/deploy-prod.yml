@@ -1,0 +1,50 @@
+name: deploy-prod
+
+on:
+  push:
+    branches:
+      - main
+
+
+jobs:
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+        with:
+          fetch-depth: 1
+      - name: Run tests
+        run: sudo apt-get update -y && sudo apt-get install python3.8 -y &&  sudo apt-get install python-virtualenv -y && make test
+
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: copy file via scp
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSHKEY }}
+        port: ${{ secrets.PORT }}
+        source: "./*"
+        target: "./quasar-django-templates"
+
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - name: Deploy Flora
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSHKEY }}
+        port: ${{ secrets.PORT }}
+        command_timeout: 200m
+        script:  cd quasar-django-templates/ && make deploy-prod
+

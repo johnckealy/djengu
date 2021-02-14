@@ -24,6 +24,7 @@ services:
             - API_URL=${API_URL}
             - ORIGIN_URL=${ORIGIN_URL}
             - LETS_ENCRYPT_ENDPOINT=${LETS_ENCRYPT_ENDPOINT}
+            - LETS_ENCRYPT_EMAIL=${LETS_ENCRYPT_EMAIL}
         networks:
             - web
 
