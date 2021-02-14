@@ -1,0 +1,18 @@
+[{
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$216000$UZzWu7vROAeB$DvsSHQUpZ81tmcr+u/bEwAm5gn4V1MA5azlJw3D+FMQ=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "jane",
+        "first_name": "Jane",
+        "last_name": "Doe",
+        "email": "jane@email.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2021-01-29T12:54:20.060Z",
+        "groups": [],
+        "user_permissions": []
+    }
+}]

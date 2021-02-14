@@ -10,10 +10,11 @@ djangorestframework_simplejwt
 PyJWT
 python-dateutil
 whitenoise
+pytest-django
 selenium
 django-extensions
-celery==4.4.7
-redis
-django-celery-beat
-django-celery-results
+# celery==4.4.7
+# redis
+# django-celery-beat
+# django-celery-results
 boto3

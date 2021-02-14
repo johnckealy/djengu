@@ -12,8 +12,8 @@ def run():
         user.save()
         LOG.info(f"\n{L.SUCCESS} Normal User 'john@email.com' created.{L.ENDC}\n")
 
-    if not User.objects.filter(username='admin').exists():
-        user=User.objects.create_user(username='admin', email='admin@email.com', password='asdf')
+    if not User.objects.filter(username='admin_user').exists():
+        user=User.objects.create_user(username='admin_user', email='admin@email.com', password='asdf')
         user.is_superuser=True
         user.is_staff=True
         user.save()
