@@ -9,5 +9,5 @@
 }
 
 {$ORIGIN_URL}  {
-    reverse_proxy nuxt:3000
+    reverse_proxy quasar:3000
 }

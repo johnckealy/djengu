@@ -49,6 +49,9 @@ backend-serve: env-dev migrations
 frontend-serve: env-dev
 	cd frontend && quasar dev
 
+frontend-prod-serve: env-prod
+	cd frontend/dist/ssr/ && npm run start
+
 run-django-scripts: env-dev
 	@$(IN_ENV) && python $(DJANGO_MANAGE) runscript create_test_users
 

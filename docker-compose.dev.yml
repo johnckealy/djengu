@@ -29,12 +29,12 @@ services:
             - postgres_data:/var/lib/postgresql/data/
 
 
-    # # Nuxt frontend app
-    # nuxt:
-    #     build: ./frontend/
-    #     ports:
-    #         - "3000:3000"
-    #     env_file:
-    #         - ./env/.env.dev
-    #     command:
-    #         "npm run dev"
+    # Quasar frontend app
+    quasar:
+        build: ./frontend/
+        ports:
+            - "3000:3000"
+        env_file:
+            - ./env/.env.dev
+        command:
+            bash -c "cd dist/ssr/ && npm run start"
