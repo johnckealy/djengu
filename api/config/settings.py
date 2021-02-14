@@ -13,7 +13,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'foo')
 
 DEBUG = os.environ.get('DEBUG') == 'true'
 
-ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', []).split(',')
+ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', '').split(',')
 
 
 INSTALLED_APPS = [
