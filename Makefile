@@ -41,7 +41,7 @@ build-python:
 	$(IN_ENV) && pip3 install -r api/requirements.txt
 
 build-frontend:
-	cd frontend && npm i && quasar build
+	cd frontend && npm i && quasar build -m ssr
 
 backend-serve: env-dev migrations
 	$(IN_ENV) && python $(DJANGO_MANAGE) runserver
