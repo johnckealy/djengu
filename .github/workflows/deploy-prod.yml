@@ -15,10 +15,7 @@ jobs:
         with:
           fetch-depth: 1
       - name: Run tests
-        run: sudo apt-get update -y && \
-            sudo apt-get install python3.8 -y && \
-            sudo apt-get install python-virtualenv -y && \
-            make test
+        run: sudo apt-get update -y && sudo apt-get install python3.8 -y &&  sudo apt-get install python-virtualenv -y && make test
 
 
   build:
