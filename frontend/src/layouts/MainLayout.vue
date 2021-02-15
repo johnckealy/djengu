@@ -1,20 +1,23 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
-      <q-toolbar>
+      <q-toolbar class="glossy">
         <q-btn
           flat
           dense
-          class="q-pa-lg"
+          class="q-ma-md"
           round
-          icon="menu"
+          icon="person"
+          no-caps
           aria-label="Menu"
-          @click="openDialog=true"
-        > Login {{ openDialog }}</q-btn>
+          @click="openLoginDialog"
+        >
+          <span class="text-h6 q-mx-sm">Login</span></q-btn
+        >
       </q-toolbar>
     </q-header>
 
-    <login-form :openDialog="openDialog" />
+    <login-form />
 
     <q-page-container>
       <router-view />
@@ -23,17 +26,35 @@
 </template>
 
 <script>
-import EssentialLink from 'components/EssentialLink.vue'
-import LoginForm from 'components/LoginForm.vue'
+import EssentialLink from "components/EssentialLink.vue";
+import LoginForm from "components/LoginForm.vue";
 
 export default {
-  name: 'MainLayout',
+  name: "MainLayout",
   components: {
     EssentialLink,
-    LoginForm
+    LoginForm,
   },
-  data: () => ({
-    openDialog: false
-  })
-}
+  mounted() {
+    this.$q.notify.setDefaults({
+      color: "green-4",
+      textColor: "white",
+      icon: "warning",
+      message: "Login was successful",
+      position: "top-right",
+      timeout: 2500,
+      actions: [{ icon: "close", color: "white" }],
+    });
+  },
+  methods: {
+    openLoginDialog() {
+      this.$store.commit("authInfo/toggleLoginDialog");
+    },
+  },
+  computed: {
+    loginDialog() {
+      return this.$store.state.authInfo.loginDialog;
+    },
+  },
+};
 </script>
