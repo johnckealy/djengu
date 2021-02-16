@@ -20,11 +20,19 @@
         />
       </a>
     </div>
+
+    <q-btn @click="getUserProfile">Get User </q-btn>
   </q-page>
 </template>
 
 <script>
 export default {
   name: "PageIndex",
+  methods: {
+    async getUserProfile() {
+      const resp = await this.$axios.get("/profile/");
+      console.log("response: ", resp);
+    },
+  },
 };
 </script>
