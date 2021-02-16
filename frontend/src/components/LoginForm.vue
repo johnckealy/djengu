@@ -1,13 +1,12 @@
 <template>
-  <q-dialog v-model="loginDialog" persistent>
     <div class="container">
       <q-card class="q-pa-lg">
-        <q-toolbar class="q-pa-sm">
+        <q-toolbar class="q-pb-lg">
           <q-avatar>
             <img src="https://cdn.quasar.dev/logo/svg/quasar-logo.svg" />
           </q-avatar>
 
-          <q-toolbar-title class="q-mx-16"> Login </q-toolbar-title>
+          <q-toolbar-title class="q-mx-sm"> Login </q-toolbar-title>
 
           <q-btn
             flat
@@ -42,6 +41,10 @@
             outlined
           />
 
+          <div class="text-body1 text-red" v-if="loginErrorMessage">
+            There was a problem logging you in. Please check your details.
+          </div>
+
           <div>
             <q-btn
               no-caps
@@ -52,10 +55,10 @@
               color="primary"
             />
           </div>
+
         </q-form>
       </q-card>
     </div>
-  </q-dialog>
 </template>
 
 <script>
@@ -64,22 +67,28 @@ export default {
     return {
       username: null,
       password: null,
+      loginErrorMessage: false
     };
   },
   methods: {
     closeLoginDialog() {
-      this.$store.commit("authInfo/toggleLoginDialog");
+      this.$store.commit("authInfo/closeLoginDialog");
     },
-    onSubmit() {
-      this.$q.notify({
-        message: "Login was successful",
-      });
+    async onSubmit() {
+      const loginOk = await this.$store.dispatch('authInfo/AUTH_LOGIN', {username: 'john@email.com', password: 'asdf'})
+      if (loginOk) {
+
+        this.$q.notify({ message: "Login was successful" });
+      this.$store.commit("authInfo/checkTokens");
+      this.closeLoginDialog()
+      this.$route.path == this.$store.state.authInfo.redirectUrl ?
+        this.$router.go() : this.$router.push(this.$store.state.authInfo.redirectUrl)
+      }
+      else {
+        this.$q.notify({ message: "Login was not successful!", color: "red-6", icon: "error" });
+        this.loginErrorMessage = true;
+      }
     },
-  },
-  computed: {
-    loginDialog() {
-      return this.$store.state.authInfo.loginDialog;
-    },
-  },
+  }
 };
 </script>

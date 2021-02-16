@@ -1,6 +1,8 @@
 from rest_framework import generics
 from rest_framework.response import Response
 from .serializers import RegisterSerializer, UserSerializer
+from rest_framework.permissions import IsAuthenticated
+
 
 class RegisterApi(generics.GenericAPIView):
 
@@ -14,3 +16,13 @@ class RegisterApi(generics.GenericAPIView):
             "user": UserSerializer(user, context=self.get_serializer_context()).data,
             "message": "User Created Successfully."
         })
+
+
+class UserProfile(generics.GenericAPIView):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = UserSerializer
+
+    def get(self, request):
+        context = UserSerializer(request.user).data
+        return Response(context)
+
