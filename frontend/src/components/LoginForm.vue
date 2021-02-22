@@ -1,64 +1,61 @@
 <template>
-    <div class="container">
-      <q-card class="q-pa-lg">
-        <q-toolbar class="q-pb-lg">
-          <q-avatar>
-            <img src="https://cdn.quasar.dev/logo/svg/quasar-logo.svg" />
-          </q-avatar>
+  <div class="container">
+    <q-card class="q-pa-lg">
+      <q-toolbar class="q-pb-lg">
+        <q-avatar>
+          <img src="https://cdn.quasar.dev/logo/svg/quasar-logo.svg" />
+        </q-avatar>
 
-          <q-toolbar-title class="q-mx-sm"> Login </q-toolbar-title>
+        <q-toolbar-title class="q-mx-sm"> Login </q-toolbar-title>
 
+        <q-btn
+          flat
+          round
+          dense
+          icon="close"
+          v-close-popup
+          @click="closeLoginDialog"
+        />
+      </q-toolbar>
+      <q-form @submit="onSubmit" class="q-gutter-md">
+        <q-input
+          v-model="username"
+          label="Username"
+          lazy-rules="ondemand"
+          :rules="[
+            (val) => (val && val.length > 0) || 'Please provide your username',
+          ]"
+          outlined
+        />
+
+        <q-input
+          v-model="password"
+          label="Password"
+          type="password"
+          lazy-rules="ondemand"
+          :rules="[
+            (val) => (val && val.length > 0) || 'Please provide your password',
+          ]"
+          outlined
+        />
+
+        <div class="text-body1 text-red" v-if="loginErrorMessage">
+          There was a problem logging you in. Please check your details.
+        </div>
+
+        <div>
           <q-btn
-            flat
-            round
-            dense
-            icon="close"
-            v-close-popup
-            @click="closeLoginDialog"
+            no-caps
+            glossy
+            class="q-ml-md full-width q-mx-auto"
+            label="Submit"
+            type="submit"
+            color="primary"
           />
-        </q-toolbar>
-        <q-form @submit="onSubmit" class="q-gutter-md">
-          <q-input
-            v-model="username"
-            label="Username"
-            lazy-rules="ondemand"
-            :rules="[
-              (val) =>
-                (val && val.length > 0) || 'Please provide your username',
-            ]"
-            outlined
-          />
-
-          <q-input
-            v-model="password"
-            label="Password"
-            type="password"
-            lazy-rules="ondemand"
-            :rules="[
-              (val) =>
-                (val && val.length > 0) || 'Please provide your password',
-            ]"
-            outlined
-          />
-
-          <div class="text-body1 text-red" v-if="loginErrorMessage">
-            There was a problem logging you in. Please check your details.
-          </div>
-
-          <div>
-            <q-btn
-              no-caps
-              glossy
-              class="q-ml-md full-width q-mx-auto"
-              label="Submit"
-              type="submit"
-              color="primary"
-            />
-          </div>
-
-        </q-form>
-      </q-card>
-    </div>
+        </div>
+      </q-form>
+    </q-card>
+  </div>
 </template>
 
 <script>
@@ -67,7 +64,7 @@ export default {
     return {
       username: null,
       password: null,
-      loginErrorMessage: false
+      loginErrorMessage: false,
     };
   },
   methods: {
@@ -75,20 +72,26 @@ export default {
       this.$store.commit("authInfo/closeLoginDialog");
     },
     async onSubmit() {
-      const loginOk = await this.$store.dispatch('authInfo/AUTH_LOGIN', {username: 'john@email.com', password: 'asdf'})
+      const loginOk = await this.$store.dispatch("authInfo/AUTH_LOGIN", {
+        username: "john@email.com",
+        password: "asdf",
+      });
       if (loginOk) {
-
         this.$q.notify({ message: "Login was successful" });
-      this.$store.commit("authInfo/checkTokens");
-      this.closeLoginDialog()
-      this.$route.path == this.$store.state.authInfo.redirectUrl ?
-        this.$router.go() : this.$router.push(this.$store.state.authInfo.redirectUrl)
-      }
-      else {
-        this.$q.notify({ message: "Login was not successful!", color: "red-6", icon: "error" });
+        this.$store.commit("authInfo/checkTokens");
+        this.closeLoginDialog();
+        this.$route.path == this.$store.state.authInfo.redirectUrl
+          ? this.$router.go()
+          : this.$router.push(this.$store.state.authInfo.redirectUrl);
+      } else {
+        this.$q.notify({
+          message: "Login was not successful!",
+          color: "red-6",
+          icon: "error",
+        });
         this.loginErrorMessage = true;
       }
     },
-  }
+  },
 };
 </script>
