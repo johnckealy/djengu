@@ -53,7 +53,7 @@ services:
         volumes:
             - ./frontend:/var/lib/frontend
         command:
-            bash -c "cd dist/ssr/ && npm run start"
+            bash -c "cd dist/ssr/ && PORT=${PORT} npm run start"
         env_file:
             - ./env/.env.${ENVIRONMENT}
         networks:
