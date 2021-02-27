@@ -11,10 +11,6 @@ env-test:
 	$(eval include env/.env.test)
 	$(eval export $(shell sed 's/=.*//' env/.env.test))
 
-env-staging:
-	$(eval include env/.env.staging)
-	$(eval export $(shell sed 's/=.*//' env/.env.staging))
-
 env-prod:
 	$(eval include env/.env.prod)
 	$(eval export $(shell sed 's/=.*//' env/.env.prod))
@@ -24,17 +20,13 @@ celery: env-dev
 
 deploy-prod: env-prod build-frontend
 	echo "Building ${ENVIRONMENT} Environment"
-	docker-compose -f docker-compose.prod.yml up --build -d
-
-deploy-staging: env-staging build-frontend
-	echo "Building ${ENVIRONMENT} Environment"
-	docker-compose -f docker-compose.prod.yml up --build -d
+	docker-compose up --build -d
 
 docker-down: env-prod
-	docker-compose -f docker-compose.prod.yml down
+	docker-compose down
 
 docker-logs: env-prod
-	docker-compose -f docker-compose.staging.yml logs -f
+	docker-compose logs -f
 
 build-python:
 	virtualenv -p $(PYTHON) $(ENV_DIR)
