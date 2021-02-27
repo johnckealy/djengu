@@ -3,7 +3,7 @@ version: "3.5"
 
 # External network
 networks:
-    web:
+    ${CADDY_NETWORK_NAME}:
         external: true
 
 volumes:
@@ -11,24 +11,8 @@ volumes:
 
 
 services:
-    # CaddyServer reverse proxy
-    caddy:
-        restart: always
-        image: caddy:2-alpine
-        ports:
-            - "80:80"
-            - "443:443"
-        volumes:
-            - ${ROOT_FOLDER}/caddy/Caddyfile:/etc/caddy/Caddyfile
-        environment:
-            - API_URL=${API_URL}
-            - ORIGIN_URL=${ORIGIN_URL}
-            - LETS_ENCRYPT_ENDPOINT=${LETS_ENCRYPT_ENDPOINT}
-            - LETS_ENCRYPT_EMAIL=${LETS_ENCRYPT_EMAIL}
-        networks:
-            - web
 
-    # Django web app
+    # Django app
     django:
         restart: always
         build:
@@ -45,7 +29,7 @@ services:
         depends_on:
             - db
         networks:
-            - web
+            - ${CADDY_NETWORK_NAME}
 
 
     # Django database
@@ -57,7 +41,7 @@ services:
         env_file:
             - ${ROOT_FOLDER}/env/.env.db
         networks:
-            - web
+            - ${CADDY_NETWORK_NAME}
 
     # Nuxt frontend app
     quasar:
@@ -73,4 +57,4 @@ services:
         env_file:
             - ./env/.env.${ENVIRONMENT}
         networks:
-            - web
+            - ${CADDY_NETWORK_NAME}

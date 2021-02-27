@@ -15,10 +15,13 @@ env-prod:
 	$(eval include env/.env.prod)
 	$(eval export $(shell sed 's/=.*//' env/.env.prod))
 
+env-sub: env-prod
+	envsubst < "docker-compose.prod.yml" > "docker-compose.yml"
+
 celery: env-dev
 	$(IN_ENV) && cd api && celery -A config worker --beat -l info -S django
 
-deploy-prod: env-prod build-frontend
+deploy-prod: env-prod env-sub build-frontend
 	echo "Building ${ENVIRONMENT} Environment"
 	docker-compose up --build -d
 
