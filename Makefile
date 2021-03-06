@@ -54,6 +54,13 @@ flush-the-database-yes-really: env-dev
 test: env-test build-python
 	$(IN_ENV) && $(PYTHON) -m pytest api/tests/
 
+encrypt-dotenv:
+	tar -c env/ | gpg --symmetric -c -o env.tar.gpg
+
+# decrypt-dotenv:
+# 	gpg --quiet --batch --yes --decrypt --passphrase=foo env.tar.gpg | tar -x
+# 	rm env.tar.gpg
+
 env-clean:
 	@rm -rf $(ENV_DIR)
 	@rm -rf node_modules frontend/node_modules

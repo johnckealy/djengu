@@ -2,6 +2,9 @@
 
 A full production and dev environment for Django and Quasar.
 
+Please bear in mind that some functionality (such as Vagrant and CaddyServer) has not been
+generalized, and refers to folders on my local machine. These should be
+easy enough to adapt, but you can contact me if you need help setting these up.
 
 
 ### Getting started
@@ -53,13 +56,15 @@ by adding the entry to the Caddyfile and running `make deploy-prod` in the new a
 
 ### Flavours
 
-Auto DevOps has three branches:
+Auto DevOps has four branches:
 
 1) `Main`: Runs an instance of quasar and Django
 
 2) `Static-site`: Runs a basic quasar application
 
 3) `Auth`: Django and Quasar with JWT token authentication set up out of the box
+
+4) `Celery`: Based on Main, with Celery beat set up
 
 
 
