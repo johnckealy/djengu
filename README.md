@@ -1,3 +1,6 @@
+
+![Build](https://github.com/johnckealy/auto-devops/actions/workflows/deploy-prod.yml/badge.svg)
+
 # Auto DevOps
 
 A full production and dev environment for Django and Quasar.

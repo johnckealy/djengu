@@ -19,11 +19,11 @@ services:
             context: ${ROOT_FOLDER}/api
             dockerfile: ${ROOT_FOLDER}/api/Dockerfile
         expose:
-            - 8000
+            - ${DJANGO_PORT}
         environment:
             - url=${API_URL}
         command:
-            "gunicorn config.wsgi:application --bind 0.0.0.0:8000"
+            "gunicorn config.wsgi:application --bind 0.0.0.0:${DJANGO_PORT}"
         env_file:
             - ${ROOT_FOLDER}/env/.env.${ENVIRONMENT}
         depends_on:
@@ -47,7 +47,7 @@ services:
     quasar:
         build: ${ROOT_FOLDER}/frontend/
         ports:
-            - "3000:3000"
+            - "${PORT}:${PORT}"
         environment:
             - url=${ORIGIN_URL}
         volumes:
