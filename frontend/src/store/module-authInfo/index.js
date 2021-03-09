@@ -27,7 +27,7 @@ export default {
   actions: {
     AUTH_LOGIN: async (store, user) => {
       try {
-        const response = await store.state.$axios({ url: '/api/token/', data: user, method: 'POST' })
+        const response = await store.state.$axios({ url: '/dj-rest-auth/login/', data: user, method: 'POST' })
         LocalStorage.set('refresh-token', response.data.refresh)
         LocalStorage.set('access-token', response.data.access)
         return true

@@ -2,7 +2,11 @@ Django
 psycopg2-binary
 gunicorn
 django-cors-headers
-django-rest-framework
+dj-rest-auth
+django-allauth
+django-registration
+djangorestframework_simplejwt
+python-dateutil
 whitenoise
 pytest-django
 django-extensions
