@@ -26,10 +26,20 @@ INSTALLED_APPS = [
 
     'django_extensions',
     'corsheaders',
+    'dj_rest_auth',
     'rest_framework',
-    'rest_framework_simplejwt',
+    'rest_framework.authtoken',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'dj_rest_auth.registration',
     'users',
 ]
+
+# dj_rest_auth settting
+SITE_ID = 1
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -129,21 +139,26 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Django rest framework
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-     ],
-    'TEST_REQUEST_DEFAULT_FORMAT': 'json'
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+        'dj_rest_auth.jwt_auth.JWTCookieAuthentication'
+    ),
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
 }
 
-# Auth Tokens
-SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=int(os.environ.get('ACCESS_TOKEN_LIFETIME_IN_MINUTES', 120))),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=int(os.environ.get('REFRESH_TOKEN_LIFETIME_IN_DAYS', 4)))
-}
+REST_USE_JWT = True
+JWT_AUTH_COOKIE = 'auth'
 
 # Static assets
 if DEBUG:
     WHITENOISE_AUTOREFRESH = True
 
+SWAGGER_SETTINGS = {
+    'LOGIN_URL': 'login',
+    'LOGOUT_URL': 'logout',
+}
+
 # Cors
-CORS_ALLOWED_ORIGINS = [os.environ.get('ORIGIN_URL')]
+# CORS_ALLOWED_ORIGINS = [os.environ.get('ORIGIN_URL')]
+CORS_ORIGIN_ALLOW_ALL = True

@@ -10,7 +10,7 @@ Vagrant.configure("2") do |config|
   config.vm.network "public_network", ip: "192.168.33.121", type: "dhcp", bridge: "wlp2s0"
 
   config.vm.provision "file", source: "/home/jokea/code/digitalocean/initial_setup.sh", destination: "~/initial_setup.sh"
-  config.vm.provision "file", source: "/home/jokea/code/caddy/", destination: "~/caddy/"
+  config.vm.provision "file", source: "/home/jokea/code/", destination: "~/caddy/"
 
   # Enable provisioning with a shell script. Additional provisioners such as
   # Ansible, Chef, Docker, Puppet and Salt are also available. Please see the
