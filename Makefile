@@ -23,7 +23,7 @@ celery: env-dev
 
 deploy-prod: env-prod env-sub build-frontend
 	echo "Building ${ENVIRONMENT} Environment"
-	docker-compose up --build 
+	docker-compose up --build
 
 build-python:
 	virtualenv -p $(PYTHON) $(ENV_DIR)
@@ -59,7 +59,6 @@ encrypt-dotenv:
 
 # decrypt-dotenv:
 # 	gpg --quiet --batch --yes --decrypt --passphrase=foo env.tar.gpg | tar -x
-# 	rm env.tar.gpg
 
 env-clean:
 	@rm -rf $(ENV_DIR)
