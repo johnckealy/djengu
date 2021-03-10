@@ -13,7 +13,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'foo')
 
 DEBUG = os.environ.get('DEBUG') == 'true'
 
-ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', '').split(',')
+ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS').split(',')
 
 
 INSTALLED_APPS = [
@@ -74,14 +74,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
-
 # Database
 DATABASES = {
     "default": {
@@ -140,25 +132,37 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Django rest framework
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
         'dj_rest_auth.jwt_auth.JWTCookieAuthentication'
     ),
-    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+
+    'DEFAULT_PERMISSION_CLASSES': [
+       'rest_framework.permissions.IsAuthenticated',
+    ]
 }
 
+
+REST_SESSION_LOGIN = False
 REST_USE_JWT = True
-JWT_AUTH_COOKIE = 'auth'
+JWT_AUTH_COOKIE = 'jwt-access-token'
+JWT_AUTH_REFRESH_COOKIE = 'jwt-refresh-token'
 
 # Static assets
 if DEBUG:
     WHITENOISE_AUTOREFRESH = True
 
-SWAGGER_SETTINGS = {
-    'LOGIN_URL': 'login',
-    'LOGOUT_URL': 'logout',
-}
 
 # Cors
-# CORS_ALLOWED_ORIGINS = [os.environ.get('ORIGIN_URL')]
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOWED_ORIGINS = [os.environ.get('ORIGIN_URL')]
+CORS_ALLOW_CREDENTIALS = True
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+
+# CSRF_TRUSTED_ORIGINS = [os.environ.get('ORIGIN_URL')]
+# CSRF_COOKIE_DOMAIN = [os.environ.get('ORIGIN_URL')]
+# SESSION_COOKIE_SECURE = False
+# CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ALLOW_CREDENTIALS = True
