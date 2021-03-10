@@ -1,5 +1,6 @@
 from django.urls import path, include
 from .views import  UserProfile
+from allauth.account.views import confirm_email
 
 
 
