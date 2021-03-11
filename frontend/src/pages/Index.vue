@@ -14,7 +14,6 @@ export default {
   methods: {
     async getUserProfile() {
       const resp = await this.$axios.get("/profile/");
-      console.log('response: ', resp)
     }
   }
 }

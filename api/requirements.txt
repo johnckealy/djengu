@@ -10,4 +10,5 @@ whitenoise
 pytest-django
 selenium
 django-extensions
+django-sslserver
 
