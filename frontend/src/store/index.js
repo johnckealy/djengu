@@ -13,12 +13,12 @@ Vue.use(Vuex)
  * async/await or return a Promise which resolves
  * with the Store instance.
  */
-import authInfo from './module-authInfo'
+import auth from './module-auth'
 
 export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
-      authInfo
+      auth
     },
 
     // enable strict mode (adds overhead!)

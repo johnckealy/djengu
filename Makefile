@@ -37,7 +37,7 @@ build-frontend:
 	cd frontend && npm i && npx quasar build -m ssr
 
 backend-serve: env-dev migrations
-	$(IN_ENV) && python $(DJANGO_MANAGE) runserver
+	$(IN_ENV) && python $(DJANGO_MANAGE) runsslserver
 
 frontend-serve: env-dev
 	cd frontend && quasar dev -m ssr
@@ -68,7 +68,11 @@ configure-vagrant:
 	@sudo ./.djengu/.production_toolbox/configure_vagrant.sh
 	@./.djengu/.production_toolbox/caddy/vagrant_caddy.sh
 
+<<<<<<< HEAD
 clean:
+=======
+clean-env:
+>>>>>>> aeaded1 (Auth is finally working)
 	@rm -rf $(ENV_DIR)
 	@rm -rf node_modules frontend/node_modules
 	@rm -rf package-lock.json frontend/package-lock.json

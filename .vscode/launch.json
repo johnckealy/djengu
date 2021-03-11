@@ -8,7 +8,7 @@
             "envFile": "${workspaceFolder}/env/.env.dev",
             "program": "${workspaceFolder}/api/manage.py",
             "args": [
-                "runserver",
+                "runsslserver",
                 "--noreload",
                 "--nothreading"
             ],

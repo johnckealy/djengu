@@ -37,7 +37,7 @@ export default {
     CHECK_TOKENS: async (store) => {
       try {
         const response = await store.state.$axios({ url: '/user/',  method: 'GET' })
-        store.commit("setAuthUser", response.data.user);
+        store.commit("setAuthUser", response.data);
       }
       catch (error) {
         console.log('Token verify check failed. Attempting token refresh...')
@@ -45,7 +45,7 @@ export default {
           await store.state.$axios({ url: '/token/refresh/', data: {},  method: 'POST' })
           const response = await store.state.$axios({ url: '/user/',  method: 'GET' })
           console.log('response', response)
-          store.commit("setAuthUser", response.data.user);
+          store.commit("setAuthUser", response.data);
         }
         catch {
           console.log('Token refresh attempt failed.')
@@ -53,8 +53,9 @@ export default {
       }
 
     },
-    AUTH_LOGOUT: (store) => {
-      // store.commit('CHECK_TOKENS')
+    AUTH_LOGOUT: async (store) => {
+      const response = await store.state.$axios({ url: '/logout/', data: {}, method: 'POST' })
+      store.commit("setAuthUser", null);
       store.commit("updateRedirectUrl", '/');
       return true
     }

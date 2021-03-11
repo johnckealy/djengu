@@ -30,7 +30,8 @@ export default {
   name: "PageIndex",
   methods: {
     async getUserProfile() {
-      const resp = await this.$axios.get("/profile/");
+      const resp = await this.$axios.get("/user/");
+      console.log(resp.data)
     }
   }
 }
