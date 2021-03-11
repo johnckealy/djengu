@@ -69,19 +69,19 @@ export default {
   },
   methods: {
     closeLoginDialog() {
-      this.$store.commit("authInfo/closeLoginDialog");
+      this.$store.commit("auth/closeLoginDialog");
     },
     async onSubmit() {
-      const loginOk = await this.$store.dispatch("authInfo/AUTH_LOGIN", {
+      const loginOk = await this.$store.dispatch("auth/AUTH_LOGIN", {
         username: "jokea",
         password: "asdf",
       });
       if (loginOk) {
         this.$q.notify({ message: "Login was successful" });
         this.closeLoginDialog();
-        this.$route.path == this.$store.state.authInfo.redirectUrl
+        this.$route.path == this.$store.state.auth.redirectUrl
           ? this.$router.go()
-          : this.$router.push(this.$store.state.authInfo.redirectUrl);
+          : this.$router.push(this.$store.state.auth.redirectUrl);
       } else {
         this.$q.notify({
           message: "Login was not successful!",

@@ -33,7 +33,7 @@ build-frontend:
 	cd frontend && npm i && quasar build -m ssr
 
 backend-serve: env-dev migrations
-	$(IN_ENV) && python $(DJANGO_MANAGE) runserver
+	$(IN_ENV) && python $(DJANGO_MANAGE) runsslserver
 
 frontend-serve: env-dev
 	cd frontend && quasar dev -m ssr
@@ -60,7 +60,7 @@ encrypt-dotenv:
 # decrypt-dotenv:
 # 	gpg --quiet --batch --yes --decrypt --passphrase=foo env.tar.gpg | tar -x
 
-env-clean:
+clean-env:
 	@rm -rf $(ENV_DIR)
 	@rm -rf node_modules frontend/node_modules
 	@rm -rf package-lock.json frontend/package-lock.json

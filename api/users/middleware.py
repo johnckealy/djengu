@@ -2,13 +2,13 @@
 import json
 from django.utils.deprecation import MiddlewareMixin
 from utils import L, LOG
+from config.settings import JWT_AUTH_REFRESH_COOKIE
 
-JWT_AUTH_REFRESH_COOKIE = 'jwt-refresh-token'
 
 class MoveJWTRefreshCookieIntoTheBody(MiddlewareMixin):
     """
-    for Django Rest Framework JWT's POST "/token-refresh" endpoint --- check for a 'token' in the request.COOKIES
-    and if, add it to the body payload.
+    For Django Rest Framework JWT's POST "/token-refresh" endpoint. Check
+    for a 'refresh' in the request.COOKIES and if there, move it to the body payload.
     """
 
     def __init__(self, get_response):
@@ -25,7 +25,6 @@ class MoveJWTRefreshCookieIntoTheBody(MiddlewareMixin):
                 data['refresh'] = request.COOKIES[JWT_AUTH_REFRESH_COOKIE]
                 request._body = json.dumps(data).encode('utf-8')
             else:
-                # I cannot create a body if it is not passed so the client must send '{}'
                 LOG.info(f"\n{L.FAIL} Error in api/users/middleware.py: The incoming request body must be set to an empty object.{L.ENDC}\n")
 
         return None

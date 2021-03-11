@@ -8,5 +8,5 @@ export default (state) => {
     axios.defaults.baseURL = process.env.API_URL
 
     Vue.prototype.$axios = axios
-    state.store.state.authInfo.$axios = axios
+    state.store.state.auth.$axios = axios
 }

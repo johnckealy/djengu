@@ -42,7 +42,7 @@ export default {
   },
   computed: {
     loginDialog() {
-      return this.$store.state.authInfo.loginDialog;
+      return this.$store.state.auth.loginDialog;
     }
   }
 };

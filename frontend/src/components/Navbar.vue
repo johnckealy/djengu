@@ -16,6 +16,7 @@
 
     <q-space />
 
+    <q-btn to="/" label="Home"  color="black" />
     <q-btn to="/dashboard" label="Dashboard"  color="black" />
 
 
@@ -31,19 +32,19 @@ export default {
 
   methods: {
     openLoginDialog() {
-      this.$store.commit("authInfo/openLoginDialog");
+      this.$store.commit("auth/openLoginDialog");
     },
     async logout() {
-      await this.$store.dispatch("authInfo/AUTH_LOGOUT");
+      await this.$store.dispatch("auth/AUTH_LOGOUT");
       this.$route.path == '/' ? this.$router.go() : this.$router.push('/')
     }
   },
   computed: {
     loginDialog() {
-      return this.$store.state.authInfo.loginDialog;
+      return this.$store.state.auth.loginDialog;
     },
     authUser() {
-      return this.$store.state.authInfo.authUser;
+      return this.$store.state.auth.authUser;
     },
   },
 };

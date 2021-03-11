@@ -16,12 +16,12 @@ export default function ({ store, ssrContext }) {
   const authDirects = async (to, next) => {
     /* This method checks whether a route requires authentication,
     then redirects the user to the login screen if needed */
-    await store.dispatch("authInfo/CHECK_TOKENS");
     if (to.matched.some(route => route.meta.requiresAuth)) {
-      if (!!store.state.authInfo.authUser) {
+      await store.dispatch("auth/CHECK_TOKENS");
+      if (!!store.state.auth.authUser) {
         next();
       } else {
-        store.commit("authInfo/updateRedirectUrl", to.path);
+        store.commit("auth/updateRedirectUrl", to.path);
         next('/login');
       }
     } else {

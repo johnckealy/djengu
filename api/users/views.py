@@ -16,13 +16,3 @@ class RegisterApi(generics.GenericAPIView):
             "user": UserSerializer(user, context=self.get_serializer_context()).data,
             "message": "User Created Successfully."
         })
-
-
-class UserProfile(generics.GenericAPIView):
-    permission_classes = (IsAuthenticated,)
-    serializer_class = UserSerializer
-
-    def get(self, request):
-        context = UserSerializer(request.user).data
-        return Response(context)
-
