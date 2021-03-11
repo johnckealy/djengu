@@ -73,12 +73,11 @@ export default {
     },
     async onSubmit() {
       const loginOk = await this.$store.dispatch("authInfo/AUTH_LOGIN", {
-        username: "john@email.com",
+        username: "jokea",
         password: "asdf",
       });
       if (loginOk) {
         this.$q.notify({ message: "Login was successful" });
-        this.$store.commit("authInfo/checkTokens");
         this.closeLoginDialog();
         this.$route.path == this.$store.state.authInfo.redirectUrl
           ? this.$router.go()

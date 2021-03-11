@@ -6,8 +6,8 @@ import os
 def run():
     """Script to create two test users, one for John and one for Admin."""
     LOG.info(f"\nCreating test users...")
-    if not User.objects.filter(username='john@email.com').exists():
-        user=User.objects.create_user(username='john@email.com', email='john@email.com', first_name="John", password='asdf')
+    if not User.objects.filter(username='jokea').exists():
+        user=User.objects.create_user(username='jokea', email='john@email.com', first_name="John", password='asdf')
         user.is_superuser=False
         user.is_staff=False
         user.save()

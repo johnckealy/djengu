@@ -12,7 +12,7 @@
       <span class="text-h6 q-mx-sm">Login</span></q-btn
     >
 
-    Logged In: {{ isAuth }}
+    Logged In: {{ authUser ? authUser.first_name : 'Anonymous' }}
 
     <q-space />
 
@@ -42,8 +42,8 @@ export default {
     loginDialog() {
       return this.$store.state.authInfo.loginDialog;
     },
-    isAuth() {
-      return this.$store.state.authInfo.isAuth;
+    authUser() {
+      return this.$store.state.authInfo.authUser;
     },
   },
 };

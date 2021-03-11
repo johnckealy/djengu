@@ -10,3 +10,5 @@ python-dateutil
 whitenoise
 pytest-django
 django-extensions
+django-sslserver
+
