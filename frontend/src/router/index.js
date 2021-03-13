@@ -17,11 +17,11 @@ export default function ({ store, ssrContext }) {
     /* This method checks whether a route requires authentication,
     then redirects the user to the login screen if needed */
     if (to.matched.some(route => route.meta.requiresAuth)) {
-      await store.dispatch("auth/CHECK_TOKENS");
-      if (!!store.state.auth.authUser) {
+      await store.dispatch("authy/CHECK_TOKENS");
+      if (!!store.state.authy.authUser) {
         next();
       } else {
-        store.commit("auth/updateRedirectUrl", to.path);
+        store.commit("authy/updateRedirectUrl", to.path);
         next('/login');
       }
     } else {

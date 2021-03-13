@@ -25,7 +25,14 @@ env-prod:
 env-sub: env-prod
 	@envsubst < "docker-compose.prod.yml" > "docker-compose.yml"
 
+<<<<<<< HEAD
 deploy-prod: env-prod env-sub build-frontend
+=======
+celery: env-dev
+	$(IN_ENV) && cd api && celery -A config worker --beat -l info -S django
+
+deploy-prod: env-prod env-sub build-prod-frontend
+>>>>>>> 0a43fda (Auth is working, but not SSR)
 	echo "Building ${ENVIRONMENT} Environment"
 	docker-compose up --build
 
@@ -33,8 +40,16 @@ build-python:
 	virtualenv -p $(PYTHON) $(ENV_DIR)
 	$(IN_ENV) && pip3 install -r api/requirements.txt
 
+<<<<<<< HEAD
 build-frontend:
 	cd frontend && npm i && npx quasar build -m ssr
+=======
+build-frontend: env-dev
+	cd frontend && npm i && quasar build -m ssr
+
+build-prod-frontend: env-prod
+	cd frontend && npm i && quasar build -m ssr
+>>>>>>> 0a43fda (Auth is working, but not SSR)
 
 backend-serve: env-dev migrations
 	$(IN_ENV) && python $(DJANGO_MANAGE) runsslserver

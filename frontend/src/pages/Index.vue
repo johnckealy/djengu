@@ -22,16 +22,19 @@
     </div>
 
     <q-btn @click="getUserProfile">Get User </q-btn>
+     <login-form />
   </q-page>
 </template>
 
 <script>
+
+
+
 export default {
   name: "PageIndex",
   methods: {
     async getUserProfile() {
       const resp = await this.$axios.get("/user/");
-      console.log(resp.data)
     }
   }
 }
