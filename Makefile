@@ -21,7 +21,7 @@ env-sub: env-prod
 celery: env-dev
 	$(IN_ENV) && cd api && celery -A config worker --beat -l info -S django
 
-deploy-prod: env-prod env-sub build-frontend
+deploy-prod: env-prod env-sub build-prod-frontend
 	echo "Building ${ENVIRONMENT} Environment"
 	docker-compose up --build
 
@@ -29,7 +29,10 @@ build-python:
 	virtualenv -p $(PYTHON) $(ENV_DIR)
 	$(IN_ENV) && pip3 install -r api/requirements.txt
 
-build-frontend:
+build-frontend: env-dev
+	cd frontend && npm i && quasar build -m ssr
+
+build-prod-frontend: env-prod
 	cd frontend && npm i && quasar build -m ssr
 
 backend-serve: env-dev migrations

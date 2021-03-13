@@ -32,19 +32,16 @@ export default {
 
   methods: {
     openLoginDialog() {
-      this.$store.commit("auth/openLoginDialog");
+      this.$store.commit("authy/openLoginDialog");
     },
     async logout() {
-      await this.$store.dispatch("auth/AUTH_LOGOUT");
+      await this.$store.dispatch("authy/AUTH_LOGOUT");
       this.$route.path == '/' ? this.$router.go() : this.$router.push('/')
     }
   },
   computed: {
-    loginDialog() {
-      return this.$store.state.auth.loginDialog;
-    },
     authUser() {
-      return this.$store.state.auth.authUser;
+      return this.$store.state.authy.authUser;
     },
   },
 };
