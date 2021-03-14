@@ -27,21 +27,22 @@
 </template>
 
 <script>
+
 export default {
   name: "Navbar",
 
   methods: {
     openLoginDialog() {
-      this.$store.commit("authy/openLoginDialog");
+      this.$store.commit("authenticator/openLoginDialog");
     },
     async logout() {
-      await this.$store.dispatch("authy/AUTH_LOGOUT");
+      await this.$auth.logout()
       this.$route.path == '/' ? this.$router.go() : this.$router.push('/')
     }
   },
   computed: {
     authUser() {
-      return this.$store.state.authy.authUser;
+      return this.$store.state.authenticator.authUser;
     },
   },
 };

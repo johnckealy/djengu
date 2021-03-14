@@ -1,7 +1,6 @@
 <template>
   <q-page class="flex flex-center">
     <q-btn @click="getUserProfile">Click me</q-btn>
-     <login-form />
   </q-page>
 </template>
 
@@ -15,7 +14,8 @@ export default {
 
   methods: {
     async getUserProfile() {
-      const resp = await this.$axios.get("/user/");
+      const user = await this.$auth.axios({ url: '/user/', method: 'GET' });
+      console.log('User: ', user)
     }
   }
 }

@@ -69,19 +69,21 @@ export default {
   },
   methods: {
     closeLoginDialog() {
-      this.$store.commit("authy/closeLoginDialog");
+      this.$store.commit("authenticator/closeLoginDialog");
     },
     async onSubmit() {
-      const loginOk = await this.$store.dispatch("authy/AUTH_LOGIN", {
-        username: "jokea",
-        password: "asdf",
-      });
+
+      const loginOk = await this.$auth.login({
+        username: 'jokea',
+        password: 'asdf'
+      })
+      console.log('loginOk', loginOk)
       if (loginOk) {
         this.$q.notify({ message: "Login was successful" });
         this.closeLoginDialog();
-        this.$route.path == this.$store.state.authy.redirectUrl
+        this.$route.path == this.$store.state.authenticator.redirectUrl
           ? this.$router.go()
-          : this.$router.push(this.$store.state.authy.redirectUrl);
+          : this.$router.push(this.$store.state.authenticator.redirectUrl);
       } else {
         this.$q.notify({
           message: "Login was not successful!",

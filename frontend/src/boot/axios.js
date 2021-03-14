@@ -1,22 +1,17 @@
-import Vue from 'vue'
-import axios from 'axios'
+import Vue from 'vue';
+import { auth } from 'vue-auth-jwt'
 
-import authy from 'vue-auth-jwt'
+
 
 export default (state) => {
 
-    const store = state.store
-
-    Vue.use(authy, { store });
-
-
-    axios.defaults.withCredentials = true
-    axios.defaults.baseURL = process.env.API_URL
-
-    Vue.prototype.$axios = axios
-
-    if (state.store.state.authy) {
-        state.store.state.authy.$axios = axios
+    const config = {
+        API_URL: process.env.API_URL,
+        loginEndpoint: '/login/',
+        logoutEndpoint: '/logout/',
+        tokenRefreshEndpoint: '/token/refresh',
     }
 
+    Vue.prototype.$auth = auth(state, config)
 }
+
