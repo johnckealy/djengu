@@ -34,7 +34,8 @@ export default {
   name: "PageIndex",
   methods: {
     async getUserProfile() {
-      const resp = await this.$axios.get("/user/");
+      const user = await this.$auth.axios({ url: '/user/', method: 'GET' });
+      console.log('User: ', user)
     }
   }
 }

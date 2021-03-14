@@ -67,7 +67,7 @@ module.exports = function (/* ctx */) {
     devServer: {
       https: true,
       port: 8080,
-      open: true,
+      open: false,
 
       // contentBase: resolve(__dirname, "dist"),
       // host: "0.0.0.0",
