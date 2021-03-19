@@ -1,8 +1,7 @@
 """
-Django settings for the Django–Quasar template.
+Django settings
 """
 import os
-from django import setup as ds
 from pathlib import Path
 from datetime import timedelta
 
@@ -23,7 +22,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'django_extensions',
     'corsheaders',
     'dj_rest_auth',
@@ -37,9 +35,6 @@ INSTALLED_APPS = [
     "sslserver",
     'users',
 ]
-
-# dj_rest_auth settting
-SITE_ID = 1
 
 
 MIDDLEWARE = [
@@ -147,27 +142,27 @@ REST_FRAMEWORK = {
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
-    'SIGNING_KEY': SECRET_KEY # It's a good idea to change this.
+    'SIGNING_KEY': SECRET_KEY # It's a good idea to change this to something unique.
 }
 
 
+# dj-rest-auth authentication settings
+SITE_ID = 1
 REST_SESSION_LOGIN = False
 REST_USE_JWT = True
 JWT_AUTH_COOKIE = 'jwt-access-token'
 JWT_AUTH_REFRESH_COOKIE = 'jwt-refresh-token'
 JWT_AUTH_SECURE = True
 
+
 # Static assets
 if DEBUG:
     WHITENOISE_AUTOREFRESH = True
 
+# Email (also needed for dj-rest-auth's /registration/ endpoint)
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-# Cors & CSRF
+
+# CORS
 CORS_ALLOWED_ORIGINS = [os.environ.get('ORIGIN_URL')]
 CORS_ALLOW_CREDENTIALS = True
-
-CORS_ORIGIN_ALLOW_ALL = True
-# SESSION_COOKIE_SECURE = False
-# CSRF_TRUSTED_ORIGINS = [os.environ.get('ORIGIN_URL')]
-# CSRF_COOKIE_DOMAIN = [os.environ.get('ORIGIN_URL')]
