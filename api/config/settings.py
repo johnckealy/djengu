@@ -14,7 +14,6 @@ DEBUG = os.environ.get('DEBUG') == 'true'
 
 ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS').split(',')
 
-
 INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.admin',
@@ -36,7 +35,6 @@ INSTALLED_APPS = [
     'users',
 ]
 
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -47,7 +45,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'users.middleware.MoveJWTRefreshCookieIntoTheBody',
+    'users.middleware.MoveJWTRefreshCookieIntoTheBody'
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -69,7 +67,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
-
 
 # Database
 DATABASES = {
@@ -98,7 +95,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -119,7 +115,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
-
 
 # Static files
 STATIC_URL = "/staticfiles/"
@@ -145,7 +140,6 @@ SIMPLE_JWT = {
     'SIGNING_KEY': SECRET_KEY # It's a good idea to change this to something unique.
 }
 
-
 # dj-rest-auth authentication settings
 SITE_ID = 1
 REST_SESSION_LOGIN = False
@@ -154,14 +148,12 @@ JWT_AUTH_COOKIE = 'jwt-access-token'
 JWT_AUTH_REFRESH_COOKIE = 'jwt-refresh-token'
 JWT_AUTH_SECURE = True
 
-
-# Static assets
+# Whitenoise
 if DEBUG:
     WHITENOISE_AUTOREFRESH = True
 
 # Email (also needed for dj-rest-auth's /registration/ endpoint)
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
 
 # CORS
 CORS_ALLOWED_ORIGINS = [os.environ.get('ORIGIN_URL')]

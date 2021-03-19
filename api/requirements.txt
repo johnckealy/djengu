@@ -1,3 +1,6 @@
+## Base requirements file. After installation, it
+## is recommended that you pin your versions. You can
+## do this by running "pip freeze > requirements.txt".
 Django
 psycopg2-binary
 gunicorn

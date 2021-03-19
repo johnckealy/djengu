@@ -60,8 +60,8 @@ test: env-test build-python
 encrypt-dotenv:
 	tar -c env/ | gpg --symmetric -c -o env.tar.gpg
 
-# decrypt-dotenv:
-# 	gpg --quiet --batch --yes --decrypt --passphrase=foo env.tar.gpg | tar -x
+decrypt-dotenv:
+	gpg --quiet --batch --yes --decrypt --passphrase=foo env.tar.gpg | tar -x
 
 clean-env:
 	@rm -rf $(ENV_DIR)
