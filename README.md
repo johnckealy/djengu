@@ -1,30 +1,35 @@
 
 ![Build](https://github.com/johnckealy/auto-devops/actions/workflows/deploy-prod.yml/badge.svg)
 
-# Auto DevOps
+<img src="https://raw.githubusercontent.com/johnckealy/djengu/main/frontend/src/assets/djengu-logo.svg"
+     alt="logo image" width="230" />
 
-A full production and dev environment for Django and Quasar.
+<em> A full production and dev environment for Django and Vue. </em>
 
-Please bear in mind that some functionality (such as Vagrant and CaddyServer) has not been
-generalized, and refers to folders on my local machine. These should be
-easy enough to adapt, but you can contact me if you need help setting these up.
+Djengu is a framework for creating decoupled web applications with Django and Vue.
+It abstracts a lot of the heavy lifting in setting up both development and
+production environments, taking care of server set-up, mock environments,
+containerization, SSL/TLS, DNS, and much more.
 
-
-### Getting started
+### Quick start
 
 To start the development environment, simply run
 
+First, clone this repository.
+```bash
+git clone git@github.com:johnckealy/djengu.git
+```
+
+Djengu is controlled by a Makefile. To start, you
+may simply run the frontend, then the backend
 ```bash
 make frontend-serve
 ```
-
-to start the Quasar frontend. Run
 
 ```bash
 make backend-serve
 
 ```
-to start the Django Backend.
 
 
 ### Simulating the production environment
