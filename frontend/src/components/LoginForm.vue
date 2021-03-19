@@ -77,7 +77,6 @@ export default {
         username: 'jokea',
         password: 'asdf'
       })
-      console.log('loginOk', loginOk)
       if (loginOk) {
         this.$q.notify({ message: "Login was successful" });
         this.closeLoginDialog();

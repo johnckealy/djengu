@@ -167,7 +167,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 CORS_ALLOWED_ORIGINS = [os.environ.get('ORIGIN_URL')]
 CORS_ALLOW_CREDENTIALS = True
 
-# CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_ALLOW_ALL = True
 # SESSION_COOKIE_SECURE = False
 # CSRF_TRUSTED_ORIGINS = [os.environ.get('ORIGIN_URL')]
 # CSRF_COOKIE_DOMAIN = [os.environ.get('ORIGIN_URL')]

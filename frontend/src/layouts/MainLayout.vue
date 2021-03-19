@@ -42,7 +42,8 @@ export default {
   },
   computed: {
     loginDialog() {
-      return this.$store.state.authenticator.loginDialog;
+      console.log(this.$auth.state())
+      return this.$auth.state().loginDialog;
     },
   },
 };
