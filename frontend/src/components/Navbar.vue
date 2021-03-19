@@ -42,7 +42,7 @@ export default {
   },
   computed: {
     authUser() {
-      return this.$store.state.authenticator.authUser;
+      return this.$auth.state().authUser;
     },
   },
 };

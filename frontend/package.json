@@ -13,7 +13,7 @@
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "quasar": "^1.0.0",
-    "vue-auth-jwt": "file:../../vue-auth-jwt"
+    "vue-auth-jwt": "../../vue-auth-jwt/"
   },
   "devDependencies": {
     "@quasar/app": "^2.0.0"
