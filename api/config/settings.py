@@ -143,5 +143,8 @@ REST_FRAMEWORK = {
 if DEBUG:
     WHITENOISE_AUTOREFRESH = True
 
-# Cors
+# Email (This is also needed for dj-rest-auth's /registration/ endpoint)
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# CORS
 CORS_ALLOWED_ORIGINS = [os.environ.get('ORIGIN_URL')]

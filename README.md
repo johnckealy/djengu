@@ -7,15 +7,20 @@
 <em> A full production and dev environment for Django and Vue. </em>
 
 Djengu is a framework for creating decoupled web applications with Django and Vue.
-It abstracts a lot of the heavy lifting in setting up both development and
-production environments, taking care of server set-up, mock environments,
-containerization, SSL/TLS, DNS, and much more.
+It's essentially a cross-platform cookie-cutter. Most of the the heavy lifting in
+setting up both development and production environments is taken care of, such as
+server set-up, mock environments, containerization, SSL/TLS, DNS, testing, and much more.
+
+The concept behind Djengu is that it will remove all reliance on itself once set up.
+Djengu will create everything you need, then quietly remove itself –
+leaving you with a clean, reliable, production-ready Django/Vue application.
 
 ### Quick start
 
-First, clone this repository.
+First, clone the repository.
 ```bash
 git clone git@github.com:johnckealy/djengu.git
+cd djengu
 ```
 
 Djengu is controlled by a `Makefile`. To start, simply run
@@ -24,6 +29,7 @@ Djengu is controlled by a `Makefile`. To start, simply run
 make
 ```
 
+Then
 ```bash
 make frontend-serve
 ```
@@ -73,6 +79,33 @@ domain name to it. This must be the same domain name as the one specified in the
 Then hey presto – you have a reverse proxy – you can add new apps with unique domain names simply
 by adding the entry to the Caddyfile and running `make deploy-prod` in the new app.
 
+### Technologies
+
+Because Djengu takes care of a lot of underlying technologies, certain
+choices of technologies have already been made. This results in more
+simplicity but less flexibility. Djengu will set you up with the
+following technologies.
+
+– Django Rest Framework
+– Quasar Framework (a Vue.js framework)
+– PostgreSQL
+– Docker
+– Make
+– Vagrant
+– Github Actions
+– JWT authentication
+– Dj Rest Auth
+
+
+If you'd like to see more choices, please consider contributing to the
+project.
+
+### VsCode
+
+If you're a Visual Studio Code user, there are some premade scripts
+for running the backend application in the `.vscode/` directory. If you don't
+use vscode, just go ahead and delete this directory.
+
 ### Hosting multiple web applications on the same server instance
 
 TODO
@@ -85,7 +118,7 @@ Auto DevOps has four branches:
 
 2) `Static-site`: Runs a basic quasar application
 
-3) `Auth`: Django and Quasar with JWT token authentication set up out of the box
+3) `Authentication`: Django and Quasar with JWT token authentication set up out of the box
 
 4) `Celery`: Based on Main, with Celery beat set up
 

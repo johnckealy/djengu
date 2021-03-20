@@ -6,4 +6,5 @@ node_modules/
 src-ssr/
 .vagrant
 docker-compose.yml
-env
+env/
+.vscode/settings.json

@@ -3,8 +3,7 @@ DJANGO_MANAGE=api/manage.py
 ENV_DIR=.$(PYTHON)_env
 IN_ENV=. $(ENV_DIR)/bin/activate
 
-
-all: env-dev build-python build-frontend
+all: env-dev build-python build-frontend run-django-scripts
 
 env-dev:
 	$(eval include env/.env.dev)
@@ -39,7 +38,7 @@ backend-serve: env-dev migrations
 	$(IN_ENV) && python $(DJANGO_MANAGE) runserver
 
 frontend-serve: env-dev
-	cd frontend && quasar dev
+	cd frontend && quasar dev -m ssr
 
 frontend-prod-serve: env-prod
 	cd frontend/dist/ssr/ && npm run start
@@ -60,9 +59,8 @@ test: env-test build-python
 encrypt-dotenv:
 	tar -c env/ | gpg --symmetric -c -o env.tar.gpg
 
-# decrypt-dotenv:
-# 	gpg --quiet --batch --yes --decrypt --passphrase=foo env.tar.gpg | tar -x
-# 	rm env.tar.gpg
+decrypt-dotenv: env-dev
+	gpg --quiet --batch --yes --decrypt --passphrase=ENCRYPTION_KEY env.tar.gpg | tar -x
 
 env-clean:
 	@rm -rf $(ENV_DIR)
