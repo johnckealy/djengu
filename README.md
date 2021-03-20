@@ -13,19 +13,22 @@ containerization, SSL/TLS, DNS, and much more.
 
 ### Quick start
 
-To start the development environment, simply run
-
 First, clone this repository.
 ```bash
 git clone git@github.com:johnckealy/djengu.git
 ```
 
-Djengu is controlled by a Makefile. To start, you
-may simply run the frontend, then the backend
+Djengu is controlled by a `Makefile`. To start, simply run
+
+```bash
+make
+```
+
 ```bash
 make frontend-serve
 ```
 
+Open a new tab, and then
 ```bash
 make backend-serve
 
@@ -34,8 +37,17 @@ make backend-serve
 
 ### Simulating the production environment
 
-Assuming you have `Vagrant` installed locally, you can run
+Before setting up a server, it can be extremely useful to simulate
+the production environment. Djengu makes use of Vagrant, a tool that allows you to make
+changes in your dev environment while mirroring the code in a virtual environment.
 
+To use this feature, you'll need to install [Vagrant](https://www.vagrantup.com/downloads)
+and [VirtualBox](https://www.virtualbox.org/wiki/Downloads).
+
+The `Vagrantfile` controls the set up. If you don't wish to use this feature, simply
+remove the `Vagrantfile`.
+
+Create the environment with
 ```
 vagrant up
 ```
@@ -44,7 +56,7 @@ followed by
 vagrant ssh
 ```
 
-to start a Vagrant instance, allowing you to simulate the prod environment. Firstly,
+Firstly,
 a separate Docker container running an instance of `CaddyServer` must be spun up.
 
 Edit the `env/.env.prod` file to specify your directory structure on your VPS (keep the `/vagrant`
@@ -61,6 +73,9 @@ domain name to it. This must be the same domain name as the one specified in the
 Then hey presto – you have a reverse proxy – you can add new apps with unique domain names simply
 by adding the entry to the Caddyfile and running `make deploy-prod` in the new app.
 
+### Hosting multiple web applications on the same server instance
+
+TODO
 
 ### Flavours
 

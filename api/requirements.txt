@@ -7,10 +7,7 @@ django-rest-auth
 django-allauth
 django-registration
 djangorestframework_simplejwt
-PyJWT
 python-dateutil
 whitenoise
 pytest-django
-selenium
 django-extensions
-boto3

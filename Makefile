@@ -3,6 +3,9 @@ DJANGO_MANAGE=api/manage.py
 ENV_DIR=.$(PYTHON)_env
 IN_ENV=. $(ENV_DIR)/bin/activate
 
+
+all: env-dev build-python build-frontend
+
 env-dev:
 	$(eval include env/.env.dev)
 	$(eval export $(shell sed 's/=.*//' env/.env.dev))

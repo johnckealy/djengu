@@ -1,8 +1,7 @@
 """
-Django settings for the Django–Quasar template.
+Django settings.
 """
 import os
-from django import setup as ds
 from pathlib import Path
 from datetime import timedelta
 
@@ -13,7 +12,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'foo')
 
 DEBUG = os.environ.get('DEBUG') == 'true'
 
-ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', '').split(',')
+ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS').split(',')
 
 
 INSTALLED_APPS = [
@@ -64,12 +63,17 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+
 
 
 # Database
@@ -128,18 +132,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Django rest framework
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-     ],
-    'TEST_REQUEST_DEFAULT_FORMAT': 'json'
-}
-
-# Auth Tokens
-SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=int(os.environ.get('ACCESS_TOKEN_LIFETIME_IN_MINUTES', 120))),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=int(os.environ.get('REFRESH_TOKEN_LIFETIME_IN_DAYS', 4)))
-}
+REST_FRAMEWORK = {"""Add any django rest framework options here"""}
 
 # Static assets
 if DEBUG:
