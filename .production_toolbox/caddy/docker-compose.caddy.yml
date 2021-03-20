@@ -1,0 +1,21 @@
+
+version: "3.5"
+
+# External network
+networks:
+    caddyweb:
+        external: true
+
+
+# CaddyServer reverse proxy
+services:
+    caddy:
+        restart: always
+        image: caddy:2-alpine
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes:
+            - ./Caddyfile:/etc/caddy/Caddyfile
+        networks:
+            - caddyweb

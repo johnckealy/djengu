@@ -5,7 +5,6 @@ import Auth from 'vue-auth-jwt';
 
 export default ({ app, router, store, Vue }) => {
 
-
     const config = {
       API_BASE_URL: process.env.API_URL,
       loginEndpoint: '/login/',
