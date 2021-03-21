@@ -34,11 +34,11 @@ make
 
 After a quick initial set up, you can run
 ```bash
-make frontend-serve
+make backend-serve
 ```
 then, in a new tab, run
 ```bash
-make backend-serve
+make frontend-serve
 ```
 and your application will be ready.
 

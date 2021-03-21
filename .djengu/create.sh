@@ -62,7 +62,7 @@ echo -e "${GREEN}Great! If you need to change these options"
 echo "later, you'll find them in the env/ directory."
 echo
 echo -e "${ORANGE}We're now ready to set up Djengu. This"
-echo "may take a few minutes."
+echo "may a minute."
 echo -e "${BLUE}"
 
 export SQL_USER
@@ -94,7 +94,7 @@ while true; do
 done
 
 echo
-echo "--------------------------------------------------------"
+echo -e "--------------------------------------------------------"
 echo
 echo -e "${GREEN}\n🚀 All done!"
 echo
