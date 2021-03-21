@@ -28,6 +28,7 @@ then
     exit
 fi
 
+echo -e "Please choose your flavour of Djengo:"
 flavours=("Basic Django/Quasar" "Django/Quasar with JWT Authentication" "Static Quasar (with SSR)")
 select fav in "${flavours[@]}"; do
     case $fav in
@@ -46,6 +47,8 @@ select fav in "${flavours[@]}"; do
         *) echo "invalid option $REPLY";;
     esac
 done
+
+echo "Thisi s ${FLAVOUR}"
 
 echo
 
@@ -83,6 +86,7 @@ while true; do
         envsubst < "env_templates/.env.template.db" > "../env/.env.db";
         envsubst < "env_templates/.env.template.dev" > "../env/.env.dev";
         envsubst < "env_templates/.env.template.prod" > "../env/.env.prod";
+        cd .. && make
         break;;
 
 
@@ -97,7 +101,7 @@ echo
 echo -e "${GREEN}\n🚀 All done!"
 echo
 echo "Djengu has installed successfully. To understand the project"
-echo "layout, please check out the documentation:"
+echo "layout, please review the documentation:"
 echo
 echo "https://github.com/johnckealy/djengu/blob/main/README.md"
 echo
