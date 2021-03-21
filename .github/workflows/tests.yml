@@ -1,0 +1,18 @@
+name: deploy-prod
+
+on:
+  push:
+    branches:
+      - authentication
+
+
+jobs:
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+        with:
+          fetch-depth: 1
+      - name: Run tests
+        run: sudo apt-get update -y && sudo apt-get install python3.8 -y &&  sudo apt-get install python-virtualenv -y && make test
