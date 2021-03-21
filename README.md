@@ -32,32 +32,31 @@ Djengu is controlled by a `Makefile`. To start, simply run
 make
 ```
 
-Then
+After a quick inititial set up, you can run
 ```bash
 make frontend-serve
 ```
-
-Open a new tab, and then
+then, in a new tab, run
 ```bash
 make backend-serve
-
 ```
+and your application will be ready.
 
 
 ### Simulating the production environment
 
-Before setting up a server, it can be extremely useful to simulate
+Before setting up on a real server, it can be extremely useful to simulate
 the production environment. Djengu makes use of Vagrant, a tool that allows you to make
-changes in your dev environment while mirroring the code in a virtual machine.
+changes in your dev environment while mirroring the production code in a virtual machine.
 
 To use this feature, you'll need to install [Vagrant](https://www.vagrantup.com/downloads)
 and [VirtualBox](https://www.virtualbox.org/wiki/Downloads).
 
-The `Vagrantfile` controls the set up. If you don't wish to use this feature, simply
-remove the `Vagrantfile`.
+The `Vagrantfile` controls the set up. If you don't wish to use this feature, you can
+simply remove it.
 
 Create the environment with
-```
+```bash
 vagrant up
 ```
 followed by
@@ -85,8 +84,8 @@ by adding the entry to the Caddyfile and running `make deploy-prod` in the new a
 ### Technologies
 
 Because Djengu takes care of a lot of underlying technologies, certain
-choices of technologies have already been made. This results in more
-simplicity but less flexibility. Djengu will set you up with the
+choices have already been made. This results in more simplicity and
+speed, but less flexibility. Djengu will install with the
 following technologies.
 
 – Django Rest Framework
@@ -103,9 +102,9 @@ following technologies.
 If you'd like to see more choices, please consider contributing to the
 project.
 
-### VsCode
+### Vscode
 
-If you're a Visual Studio Code user, there are some premade scripts
+If you are a Visual Studio Code user, there are some premade scripts
 for running the backend application in the `.vscode/` directory. If you don't
 use vscode, just go ahead and delete this directory.
 
@@ -115,17 +114,10 @@ TODO
 
 ### Flavours
 
-Auto DevOps has four branches:
+Djengu currently has three choices (more will be added as the project progresses):
 
-1) `Main`: Runs an instance of quasar and Django
+1) `Basic`: Creates a basic Quasar and Django application.
 
-2) `Static-site`: Runs a basic quasar application
+2) `Authentication`: Django and Quasar with JWT token authentication out of the box
 
-3) `Authentication`: Django and Quasar with JWT token authentication set up out of the box
-
-4) `Celery`: Based on Main, with Celery beat set up
-
-
-
-
-
+3) `Static-site`: Runs a basic Quasar application with no Django backend

@@ -6,7 +6,7 @@ IN_ENV=. $(ENV_DIR)/bin/activate
 all:
 	@./.djengu/create.sh
 
-build-dev: env-dev build-python build-frontend run-django-scripts
+build-dev: env-dev build-python migrations run-django-scripts
 
 env-dev:
 	$(eval include env/.env.dev)
@@ -22,9 +22,6 @@ env-prod:
 
 env-sub: env-prod
 	@envsubst < "docker-compose.prod.yml" > "docker-compose.yml"
-
-celery: env-dev
-	$(IN_ENV) && cd api && celery -A config worker --beat -l info -S django
 
 deploy-prod: env-prod env-sub build-frontend
 	echo "Building ${ENVIRONMENT} Environment"

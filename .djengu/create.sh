@@ -28,7 +28,6 @@ then
     exit
 fi
 
-echo -e "Please choose your flavour of Djengo:"
 flavours=("Basic Django/Quasar" "Django/Quasar with JWT Authentication" "Static Quasar (with SSR)")
 select fav in "${flavours[@]}"; do
     case $fav in
@@ -47,8 +46,6 @@ select fav in "${flavours[@]}"; do
         *) echo "invalid option $REPLY";;
     esac
 done
-
-echo "Thisi s ${FLAVOUR}"
 
 echo
 
@@ -78,15 +75,15 @@ export BACKEND_URL
 while true; do
     read -p "Ready? (Y/n) " yn
     case $yn in [Yy]* )
-        if [[ ${FLAVOUR} -eq jwt ]]; then
+        if [[ "${FLAVOUR}" = "jwt" ]]; then
             git checkout authentication
-        elif [[ ${FLAVOUR} -eq static ]]; then
+        elif [[ "${FLAVOUR}" = "static" ]]; then
             git checkout static-site
         fi
-        envsubst < "env_templates/.env.template.db" > "../env/.env.db";
-        envsubst < "env_templates/.env.template.dev" > "../env/.env.dev";
-        envsubst < "env_templates/.env.template.prod" > "../env/.env.prod";
-        cd .. && make
+        envsubst < ".djengu/env_templates/.env.template.db" > "./env/.env.db";
+        envsubst < ".djengu/env_templates/.env.template.dev" > "./env/.env.dev";
+        envsubst < ".djengu/env_templates/.env.template.prod" > "./env/.env.prod";
+        make build-dev
         break;;
 
 
@@ -101,7 +98,7 @@ echo
 echo -e "${GREEN}\n🚀 All done!"
 echo
 echo "Djengu has installed successfully. To understand the project"
-echo "layout, please review the documentation:"
+echo "layout, please check out the documentation:"
 echo
 echo "https://github.com/johnckealy/djengu/blob/main/README.md"
 echo
