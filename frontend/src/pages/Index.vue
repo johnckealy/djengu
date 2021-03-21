@@ -35,7 +35,6 @@ export default {
   methods: {
     async getUserProfile() {
       const user = await this.$auth.axios({ url: '/user/', method: 'GET' });
-      console.log('User: ', user)
     }
   }
 }

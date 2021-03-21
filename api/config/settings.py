@@ -3,6 +3,7 @@ Django settings.
 """
 import os
 from pathlib import Path
+from datetime import timedelta
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -165,3 +166,4 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # CORS
 CORS_ALLOWED_ORIGINS = [os.environ.get('ORIGIN_URL')]
+CORS_ALLOW_CREDENTIALS = True

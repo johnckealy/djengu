@@ -67,12 +67,11 @@ module.exports = function (/* ctx */) {
     devServer: {
       https: true,
       port: 8080,
-      open: false,
+      open: true,
 
       // contentBase: resolve(__dirname, "dist"),
       // host: "0.0.0.0",
       hot: true,
-      // host: 'autodev.com',
       host: process.env.ORIGIN_URL.replace(/^http(s|):\/\//g, '').replace(/:\d{4}$/g, ''),
       disableHostCheck: true,
     },

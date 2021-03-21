@@ -6,9 +6,10 @@ ENV_DIR=.$(PYTHON)_env
 IN_ENV=. $(ENV_DIR)/bin/activate
 
 all:
-	@./.djengu/create.sh
+	./.djengu/create.sh
 
 build-dev: env-dev build-python migrations run-django-scripts
+	cd frontend && npm i
 
 env-dev:
 	$(eval include env/.env.dev)
@@ -33,14 +34,17 @@ build-python:
 	virtualenv -p $(PYTHON) $(ENV_DIR)
 	$(IN_ENV) && pip3 install -r api/requirements.txt
 
-build-frontend:
+build-frontend: env-dev
+	cd frontend && npm i && npx quasar build -m ssr
+
+build-prod-frontend: env-prod
 	cd frontend && npm i && npx quasar build -m ssr
 
 backend-serve: env-dev migrations
 	$(IN_ENV) && python $(DJANGO_MANAGE) runsslserver
 
 frontend-serve: env-dev
-	cd frontend && quasar dev -m ssr
+	cd frontend && npx quasar dev -m ssr
 
 frontend-prod-serve: env-prod
 	cd frontend/dist/ssr/ && npm run start
