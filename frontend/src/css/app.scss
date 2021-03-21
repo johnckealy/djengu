@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-// app global css in SCSS form
-
-a {
-    text-decoration: none;
-=======
 // breakpoint variable, from https://quasar.dev/style/breakpoints
 // Except the xs one because I think 600px is too small
 $xs-breakpoint: 718px;
@@ -53,5 +47,9 @@ $lg-breakpoint: 1920px;
   .container-xl {
     max-width: 1440px;
   }
->>>>>>> f947c18 (Login form and styles)
+
+}
+
+a {
+  text-decoration: none;
 }
