@@ -15,6 +15,9 @@ The concept behind Djengu is that it will remove all reliance on itself once set
 Djengu will create everything you need, then quietly remove itself –
 leaving you with a clean, reliable, production-ready Django/Vue application.
 
+At the moment, Djengu is limited to Django and Quasar Framework. Support for
+Vue CLI and Nuxt.js will be added soon.
+
 ### Quick start
 
 First, clone the repository.
@@ -45,7 +48,7 @@ make backend-serve
 
 Before setting up a server, it can be extremely useful to simulate
 the production environment. Djengu makes use of Vagrant, a tool that allows you to make
-changes in your dev environment while mirroring the code in a virtual environment.
+changes in your dev environment while mirroring the code in a virtual machine.
 
 To use this feature, you'll need to install [Vagrant](https://www.vagrantup.com/downloads)
 and [VirtualBox](https://www.virtualbox.org/wiki/Downloads).
