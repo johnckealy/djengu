@@ -1,4 +1,5 @@
 # Create the Caddyfile
+echo "Reconfiguring vagrant..."
 export HOST=`hostname -I | grep -oP "192+[.]\d+[.]\d+[.]\d+"`
 export API_DOMAIN=`grep -P "API_URL" env/.env.prod | sed -e "s/^API_URL=https:\/\///"`
 export ORIGIN_DOMAIN=`grep -P "ORIGIN_URL" env/.env.prod | sed -e "s/^ORIGIN_URL=https:\/\///"`

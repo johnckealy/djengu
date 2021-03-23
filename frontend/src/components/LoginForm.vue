@@ -72,10 +72,9 @@ export default {
       this.$store.commit("authenticator/closeLoginDialog");
     },
     async onSubmit() {
-
       const loginOk = await this.$auth.login({
-        username: 'jokea',
-        password: 'asdf'
+        username: 'guest',
+        password: 'secret'
       })
       if (loginOk) {
         this.$q.notify({ message: "Login was successful" });

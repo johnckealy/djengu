@@ -6,11 +6,11 @@
     local_certs
 }
 
-https://examplejohn.com {
+https://exampley.com {
     reverse_proxy quasar:3100
 }
 
 
-https://api.examplejohn.com  {
+https://api.exampley.com  {
     reverse_proxy django:8100
 }
