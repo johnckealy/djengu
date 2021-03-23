@@ -158,8 +158,8 @@ JWT_AUTH_REFRESH_COOKIE = 'jwt-refresh-token'
 JWT_AUTH_SECURE = True
 
 # Whitenoise
-if DEBUG:
-    WHITENOISE_AUTOREFRESH = True
+# if DEBUG:
+WHITENOISE_AUTOREFRESH = True
 
 # Email (This is also needed for dj-rest-auth's /registration/ endpoint)
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
