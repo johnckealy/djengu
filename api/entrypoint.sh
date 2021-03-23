@@ -15,5 +15,6 @@ fi
 
 # python entry point commands go here
 python manage.py migrate
+python manage.py collectstatic
 
 exec "$@"
