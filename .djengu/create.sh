@@ -71,6 +71,7 @@ export SQL_PASSWORD
 export DJANGO_ADMIN_PASSWORD
 export FRONTEND_URL
 export BACKEND_URL
+export SECRET_KEY=`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c45`
 
 while true; do
     read -p "Ready? (Y/n) " yn
@@ -91,6 +92,7 @@ while true; do
         * ) echo "Please answer yes or no.";;
     esac
 done
+
 
 echo
 echo "--------------------------------------------------------"

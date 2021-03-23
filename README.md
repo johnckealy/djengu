@@ -32,7 +32,7 @@ Djengu is controlled by a `Makefile`. To start, simply run
 make
 ```
 
-After a quick inititial set up, you can run
+After a quick initial set up, you can run
 ```bash
 make frontend-serve
 ```
@@ -73,7 +73,7 @@ directory until the code is moved to your VPS), as well as your preferrred Postg
 Then, you can simply enter the `/vagrant` directory and run
 
 ```
-make deloy-prod
+make deploy-prod
 ```
 
 Finally, you must enter your Vagrant instance's IP address in `/etc/hosts` and associate a

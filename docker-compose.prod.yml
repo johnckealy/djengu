@@ -3,7 +3,7 @@ version: "3.5"
 
 # External network
 networks:
-    ${CADDY_NETWORK_NAME}:
+    ${DOCKER_NETWORK_NAME}:
         external: true
 
 volumes:
@@ -29,7 +29,7 @@ services:
         depends_on:
             - db
         networks:
-            - ${CADDY_NETWORK_NAME}
+            - ${DOCKER_NETWORK_NAME}
 
 
     # Django database
@@ -41,7 +41,7 @@ services:
         env_file:
             - ${ROOT_FOLDER}/env/.env.db
         networks:
-            - ${CADDY_NETWORK_NAME}
+            - ${DOCKER_NETWORK_NAME}
 
     # Nuxt frontend app
     quasar:
@@ -57,4 +57,4 @@ services:
         env_file:
             - ./env/.env.${ENVIRONMENT}
         networks:
-            - ${CADDY_NETWORK_NAME}
+            - ${DOCKER_NETWORK_NAME}

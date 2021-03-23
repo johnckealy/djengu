@@ -1,3 +1,5 @@
+SHELL := /bin/bash
+
 PYTHON=python3.8
 DJANGO_MANAGE=api/manage.py
 ENV_DIR=.$(PYTHON)_env
@@ -25,14 +27,14 @@ env-sub: env-prod
 
 deploy-prod: env-prod env-sub build-frontend
 	echo "Building ${ENVIRONMENT} Environment"
-	docker-compose up --build 
+	docker-compose up --build
 
 build-python:
 	virtualenv -p $(PYTHON) $(ENV_DIR)
 	$(IN_ENV) && pip3 install -r api/requirements.txt
 
 build-frontend:
-	cd frontend && npm i && quasar build -m ssr
+	cd frontend && npm i && npx quasar build -m ssr
 
 backend-serve: env-dev migrations
 	$(IN_ENV) && python $(DJANGO_MANAGE) runserver
@@ -62,7 +64,11 @@ encrypt-dotenv:
 decrypt-dotenv: env-dev
 	gpg --quiet --batch --yes --decrypt --passphrase=ENCRYPTION_KEY env.tar.gpg | tar -x
 
-env-clean:
+configure-vagrant:
+	@sudo ./.djengu/.production_toolbox/configure_vagrant.sh
+	@./.djengu/.production_toolbox/caddy/vagrant_caddy.sh
+
+clean:
 	@rm -rf $(ENV_DIR)
 	@rm -rf node_modules frontend/node_modules
 	@rm -rf package-lock.json frontend/package-lock.json
