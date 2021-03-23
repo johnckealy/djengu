@@ -1,5 +1,5 @@
 
-![Build](https://github.com/johnckealy/auto-devops/actions/workflows/deploy-prod.yml/badge.svg)
+![Build](https://github.com/johnckealy/djengu/actions/workflows/build.yml/badge.svg)
 
 <img src="https://raw.githubusercontent.com/johnckealy/djengu/main/frontend/src/assets/djengu-logo.svg"
      alt="logo image" width="230" />
