@@ -25,7 +25,7 @@ env-prod:
 env-sub: env-prod
 	@envsubst < "docker-compose.prod.yml" > "docker-compose.yml"
 
-deploy-prod: env-prod env-sub build-frontend
+deploy-prod: env-prod env-sub build-prod-frontend
 	echo "Building ${ENVIRONMENT} Environment"
 	docker-compose up --build
 
@@ -33,7 +33,10 @@ build-python:
 	virtualenv -p $(PYTHON) $(ENV_DIR)
 	$(IN_ENV) && pip3 install -r api/requirements.txt
 
-build-frontend:
+build-dev-frontend: env-dev
+	cd frontend && npm i && npx quasar build -m ssr
+
+build-prod-frontend: env-prod
 	cd frontend && npm i && npx quasar build -m ssr
 
 backend-serve: env-dev migrations
