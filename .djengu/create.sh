@@ -47,7 +47,6 @@ select fav in "${flavours[@]}"; do
     esac
 done
 
-./.djengu/.production_toolbox/caddy/vagrant_caddy.sh
 
 echo
 read -p "Pick a username: " SQL_USER

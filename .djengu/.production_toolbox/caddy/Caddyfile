@@ -6,14 +6,14 @@
     local_certs
 }
 
-https://exampley.com {
+https://examplejohnny.org {
     reverse_proxy quasar:3100
 }
-www.exampley.com {
-    redir https://exampley.com{uri} permanent
+www.examplejohnny.org {
+    redir https://examplejohnny.org{uri} permanent
 }
 
 
-https://api.examply.com  {
+https://api.examplejohnny.org  {
     reverse_proxy django:8100
 }
