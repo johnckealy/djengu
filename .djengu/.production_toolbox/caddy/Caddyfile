@@ -6,7 +6,7 @@
     local_certs
 }
 
-https://examplejohnny.org {
+examplejohnny.org {
     reverse_proxy quasar:3100
 }
 www.examplejohnny.org {
@@ -14,6 +14,6 @@ www.examplejohnny.org {
 }
 
 
-https://api.examplejohnny.org  {
+api.examplejohnny.org  {
     reverse_proxy django:8100
 }

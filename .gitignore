@@ -11,3 +11,4 @@ env/.env.prod
 env/.env.db
 .vscode/settings.json
 sqlite.db
+.djengu/.production_toolbox/caddy/Caddyfile
