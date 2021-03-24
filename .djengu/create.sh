@@ -47,8 +47,16 @@ select fav in "${flavours[@]}"; do
     esac
 done
 
-./.djengu/.production_toolbox/caddy/vagrant_caddy.sh
+# Get the chosen flavour from version contol
+if [[ ${FLAVOUR} = jwt ]]; then
+    git checkout authentication >& /dev/null
+elif [[ ${FLAVOUR} = basic ]]; then
+    git checkout main >& /dev/null
+elif [[ ${FLAVOUR} = static ]]; then
+    git checkout static-site >& /dev/null
+fi
 
+# User inputs
 echo
 read -p "Pick a username: " SQL_USER
 read -sp "Set an administrator password: " DJANGO_ADMIN_PASSWORD
@@ -63,7 +71,7 @@ echo -e "${GREEN}Great! If you need to change these options"
 echo "later, you'll find them in the env/ directory."
 echo
 echo -e "${ORANGE}We're now ready to set up Djengu. This"
-echo "may a minute."
+echo "will take a moment."
 echo -e "${BLUE}"
 
 export SQL_USER
@@ -77,11 +85,6 @@ export SECRET_KEY=`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c45`
 while true; do
     read -p "Ready? (Y/n) " yn
     case $yn in [Yy]* )
-        if [[ "${FLAVOUR}" = "jwt" ]]; then
-            git checkout authentication
-        elif [[ "${FLAVOUR}" = "static" ]]; then
-            git checkout static-site
-        fi
         envsubst < ".djengu/env_templates/.env.template.db" > "./env/.env.db";
         envsubst < ".djengu/env_templates/.env.template.dev" > "./env/.env.dev";
         envsubst < ".djengu/env_templates/.env.template.prod" > "./env/.env.prod";

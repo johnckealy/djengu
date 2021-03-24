@@ -6,7 +6,7 @@
     local_certs
 }
 
-https://${ORIGIN_DOMAIN} {
+${ORIGIN_DOMAIN} {
     reverse_proxy quasar:3100
 }
 www.${ORIGIN_DOMAIN} {
@@ -14,6 +14,6 @@ www.${ORIGIN_DOMAIN} {
 }
 
 
-https://${API_DOMAIN}  {
+${API_DOMAIN}  {
     reverse_proxy django:8100
 }

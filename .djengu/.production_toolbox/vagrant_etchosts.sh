@@ -10,5 +10,6 @@ echo  >> /etc/hosts
 echo "# --- The following was added by Djengu ----" >> /etc/hosts
 echo "172.30.1.55   ${API_DOMAIN}" >> /etc/hosts
 echo "172.30.1.55   ${ORIGIN_DOMAIN}" >> /etc/hosts
+echo "172.30.1.55   www.${ORIGIN_DOMAIN}" >> /etc/hosts
 echo "# --- ---- ---- ---- ---- ---- ---- ---- ---" >> /etc/hosts
 
