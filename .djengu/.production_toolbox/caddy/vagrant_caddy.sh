@@ -3,7 +3,7 @@ set -e
 
 GREEN='\033[0;32m'
 
-echo "Configuring vagrant..."
+echo -e "\n${GREEN}Configuring vagrant. This may take a few minutes...${NC}\n"
 vagrant up
 export HOST=`hostname -I | grep -oP "192+[.]\d+[.]\d+[.]\d+"`
 export API_DOMAIN=`grep -P "API_URL" env/.env.prod | sed -e "s/^API_URL=https:\/\///"`

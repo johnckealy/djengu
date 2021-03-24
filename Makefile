@@ -26,7 +26,7 @@ env-prod:
 env-sub: env-prod
 	@envsubst < "docker-compose.prod.yml" > "docker-compose.yml"
 
-deploy-prod: env-prod env-sub # build-prod-frontend
+deploy-prod: env-prod env-sub build-prod-frontend
 	echo "Building ${ENVIRONMENT} Environment"
 	docker-compose up --build
 
