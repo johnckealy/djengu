@@ -110,7 +110,17 @@ use vscode, just go ahead and delete this directory.
 
 ### Hosting multiple web applications on the same server instance
 
-TODO
+Because Djengu is decoupled by design, it is possible to host
+several completely indendent applications on the same server
+instance. This is done using CaddyServer's built-in reverse
+proxy capability.
+
+Everything is controlled from the Caddyfile, which will
+install at /caddy/Caddyfile in production. You can add
+extra applications and then reference the docker containers.
+The important thing to remember when doing this is to use
+unique port numbers for each instance, and reference these
+port numbers in the Caddyfile.
 
 ### Flavours
 
@@ -121,3 +131,9 @@ Djengu currently has three choices (more will be added as the project progresses
 2) `Authentication`: Django and Quasar with JWT token authentication out of the box
 
 3) `Static-site`: Runs a basic Quasar application with no Django backend
+
+### Contribute
+
+Feel free to raise a Github issue with bugs and feature suggestions. You
+can also send a pull request.
+

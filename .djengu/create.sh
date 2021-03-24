@@ -37,9 +37,9 @@ select fav in "${flavours[@]}"; do
     "Django/Quasar with JWT Authentication")
             FLAVOUR=jwt
 	    break;;
-    "Static Quasar (with SSR)")
-            FLAVOUR=static
-	    break;;
+    # "Static Quasar (with SSR)")
+    #         FLAVOUR=static
+	#     break;;
 	"Quit")
 	    echo "User requested exit"
 	    exit;;
@@ -47,7 +47,16 @@ select fav in "${flavours[@]}"; do
     esac
 done
 
+# Get the chosen flavour from version contol
+if [[ ${FLAVOUR} = jwt ]]; then
+    git checkout authentication
+elif [[ ${FLAVOUR} = basic ]]; then
+    git checkout main
+elif [[ ${FLAVOUR} = static ]]; then
+    git checkout static-site
+fi
 
+# User inputs
 echo
 read -p "Pick a username: " SQL_USER
 read -sp "Set an administrator password: " DJANGO_ADMIN_PASSWORD
@@ -62,7 +71,7 @@ echo -e "${GREEN}Great! If you need to change these options"
 echo "later, you'll find them in the env/ directory."
 echo
 echo -e "${ORANGE}We're now ready to set up Djengu. This"
-echo "may take a few minutes."
+echo "may a minute."
 echo -e "${BLUE}"
 
 export SQL_USER
@@ -76,11 +85,6 @@ export SECRET_KEY=`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c45`
 while true; do
     read -p "Ready? (Y/n) " yn
     case $yn in [Yy]* )
-        if [[ "${FLAVOUR}" = "jwt" ]]; then
-            git checkout authentication
-        elif [[ "${FLAVOUR}" = "static" ]]; then
-            git checkout static-site
-        fi
         envsubst < ".djengu/env_templates/.env.template.db" > "./env/.env.db";
         envsubst < ".djengu/env_templates/.env.template.dev" > "./env/.env.dev";
         envsubst < ".djengu/env_templates/.env.template.prod" > "./env/.env.prod";
@@ -93,9 +97,8 @@ while true; do
     esac
 done
 
-
 echo
-echo "--------------------------------------------------------"
+echo -e "--------------------------------------------------------"
 echo
 echo -e "${GREEN}\n🚀 All done!"
 echo
