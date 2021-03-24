@@ -1,9 +1,7 @@
-
 Vagrant.configure("2") do |config|
 
   config.vm.box = "bento/ubuntu-20.04"
 
-  # config.vm.network "public_network", type: "dhcp", bridge: "wlp2s0" #, ip: "192.168.33.121",
   config.vm.network "private_network", ip: "172.30.1.55"
   config.vm.synced_folder ".", "/djengu"
 

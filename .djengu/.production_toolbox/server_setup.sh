@@ -5,7 +5,7 @@ set -euo pipefail
 ########################
 
 
-USERNAME=jokea
+USERNAME=djenguser
 
 
 COPY_AUTHORIZED_KEYS_FROM_ROOT=true

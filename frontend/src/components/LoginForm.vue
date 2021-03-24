@@ -12,9 +12,6 @@
           flat
           round
           dense
-          icon="close"
-          v-close-popup
-          @click="closeLoginDialog"
         />
       </q-toolbar>
       <q-form @submit="onSubmit" class="q-gutter-md">
@@ -68,17 +65,13 @@ export default {
     };
   },
   methods: {
-    closeLoginDialog() {
-      this.$store.commit("authenticator/closeLoginDialog");
-    },
     async onSubmit() {
       const loginOk = await this.$auth.login({
-        username: 'guest',
-        password: 'secret'
+        username: this.username,
+        password: this.password
       })
       if (loginOk) {
         this.$q.notify({ message: "Login was successful" });
-        this.closeLoginDialog();
         this.$route.path == this.$store.state.authenticator.redirectUrl
           ? this.$router.go()
           : this.$router.push(this.$store.state.authenticator.redirectUrl);

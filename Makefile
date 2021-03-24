@@ -28,8 +28,7 @@ env-sub: env-prod
 
 deploy-prod: env-prod env-sub # build-prod-frontend
 	echo "Building ${ENVIRONMENT} Environment"
-	@sudo ./.djengu/.production_toolbox/configure_vagrant.sh
-	docker-compose up --build -d
+	docker-compose up --build
 
 build-python:
 	virtualenv -p $(PYTHON) $(ENV_DIR)
