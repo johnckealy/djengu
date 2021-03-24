@@ -70,14 +70,14 @@ decrypt-dotenv: env-dev
 	gpg --quiet --batch --yes --decrypt --passphrase=ENCRYPTION_KEY env.tar.gpg | tar -x
 
 configure-vagrant:
-	@sudo ./.djengu/.production_toolbox/configure_vagrant.sh
+	@sudo ./.djengu/.production_toolbox/vagrant_etchosts.sh
 	@./.djengu/.production_toolbox/caddy/vagrant_caddy.sh
 
 clean:
 	@rm -rf $(ENV_DIR)
 	@rm -rf node_modules frontend/node_modules
 	@rm -rf package-lock.json frontend/package-lock.json
-	@rm -rf frontend/dist
+	@rm -rf frontend/dist frontend/src-ssr
 	@rm -rf .pytest_cache
 	@rm -rf sqlite.db
 	@echo "Environment cleaned."

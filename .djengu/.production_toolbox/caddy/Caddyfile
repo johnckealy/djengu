@@ -9,6 +9,9 @@
 https://exampley.com {
     reverse_proxy quasar:3100
 }
+www.exampley.com {
+    redir https://exampley.com{uri} permanent
+}
 
 
 https://api.exampley.com  {

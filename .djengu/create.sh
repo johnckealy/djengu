@@ -47,8 +47,9 @@ select fav in "${flavours[@]}"; do
     esac
 done
 
-echo
+./.djengu/.production_toolbox/caddy/vagrant_caddy.sh
 
+echo
 read -p "Pick a username: " SQL_USER
 read -sp "Set an administrator password: " DJANGO_ADMIN_PASSWORD
 echo

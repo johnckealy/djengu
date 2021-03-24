@@ -16,6 +16,6 @@ fi
 # python entry point commands go here
 python manage.py migrate
 python manage.py runscript create_test_users
-python manage.py collectstatic
+python manage.py collectstatic --no-input
 
 exec "$@"
