@@ -120,7 +120,7 @@ install at /caddy/Caddyfile in production. You can add
 extra applications and then reference the docker containers.
 The important thing to remember when doing this is to use
 unique port numbers for each instance, and reference these
-port numbers in the Caddyfile.
+port numbers in the Caddyfile. 
 
 ### Flavours
 
