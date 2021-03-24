@@ -15,4 +15,4 @@ jobs:
         with:
           fetch-depth: 1
       - name: Run tests
-        run: sudo apt-get update -y && sudo apt-get install python3-virtualenv -y &&  make build-dev
+        run: sudo apt-get update -y && sudo apt-get install python3-virtualenv -y && make test-build

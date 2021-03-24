@@ -61,6 +61,8 @@ flush-the-database-yes-really: env-dev
 test: env-test build-python
 	$(IN_ENV) && $(PYTHON) -m pytest api/tests/
 
+test-build: env-test build-python build-dev-frontend
+
 encrypt-dotenv:
 	tar -c env/ | gpg --symmetric -c -o env.tar.gpg
 
