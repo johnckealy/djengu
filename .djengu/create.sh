@@ -28,7 +28,7 @@ then
     exit
 fi
 
-flavours=("Basic Django/Quasar" "Django/Quasar with JWT Authentication" "Static Quasar (with SSR)")
+flavours=("Basic Django/Quasar" "Django/Quasar with JWT Authentication") #"Static Quasar (with SSR)")
 select fav in "${flavours[@]}"; do
     case $fav in
         "Basic Django/Quasar")
@@ -37,9 +37,9 @@ select fav in "${flavours[@]}"; do
     "Django/Quasar with JWT Authentication")
             FLAVOUR=jwt
 	    break;;
-    # "Static Quasar (with SSR)")
-    #         FLAVOUR=static
-	#     break;;
+    "Static Quasar (with SSR)")
+            FLAVOUR=static
+	    break;;
 	"Quit")
 	    echo "User requested exit"
 	    exit;;
@@ -49,6 +49,7 @@ done
 
 # Get the chosen flavour from version contol
 if [[ ${FLAVOUR} = jwt ]]; then
+    git fetch origin authentication
     git checkout authentication
 elif [[ ${FLAVOUR} = basic ]]; then
     git checkout main
