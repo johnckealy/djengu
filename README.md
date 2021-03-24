@@ -43,6 +43,16 @@ make backend-serve
 and your application will be ready.
 
 
+### Installation
+
+Djengu requires that the following tools be installed locally before starting.
+
+– python-virtualenv
+
+– node.js
+
+– npm
+
 ### Simulating the production environment
 
 Before setting up on a real server, it can be extremely useful to simulate
@@ -88,7 +98,7 @@ choices have already been made. This results in more simplicity and
 speed, but less flexibility. Djengu will install with the
 following technologies.
 
-– Django Rest Framework
+Django Rest Framework
 – Quasar Framework (a Vue.js framework)
 – PostgreSQL
 – Docker
@@ -115,12 +125,12 @@ several completely indendent applications on the same server
 instance. This is done using CaddyServer's built-in reverse
 proxy capability.
 
-Everything is controlled from the Caddyfile, which will
-install at /caddy/Caddyfile in production. You can add
+Everything is controlled from the `Caddyfile`, which will
+install at `/caddy/Caddyfile` in production. You can add
 extra applications and then reference the docker containers.
 The important thing to remember when doing this is to use
 unique port numbers for each instance, and reference these
-port numbers in the Caddyfile. 
+port numbers in the `Caddyfile`.
 
 ### Flavours
 
@@ -131,6 +141,18 @@ Djengu currently has three choices (more will be added as the project progresses
 2) `Authentication`: Django and Quasar with JWT token authentication out of the box
 
 3) `Static-site`: Runs a basic Quasar application with no Django backend
+
+### Test Users
+
+If you build Djengu with authentication, there is a test
+account built in. The credentials are
+```
+username: guest
+password: secret
+```
+
+You can also log in with username `admin` and the admin password
+you entered during setup.
 
 ### Contribute
 
