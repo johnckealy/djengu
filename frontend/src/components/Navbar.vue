@@ -1,18 +1,19 @@
 <template>
   <q-toolbar>
+    <router-link to="/">
+      <q-avatar @click="$router.push('/')">
+        <img src="https://cdn.quasar.dev/logo/svg/quasar-logo.svg" />
+      </q-avatar>
+    </router-link>
+
+    <span class="text-h6 q-mx-sm">{{ authUser ? authUser.first_name : "" }}</span>
+    <q-space />
     <q-btn v-if="!authUser" to="/login" icon="person" class="q-ma-md" no-caps flat dense>
       <span class="text-h6 q-mx-sm">Login</span>
     </q-btn>
     <q-btn v-else @click="logout" icon="logout" class="q-ma-md" no-caps flat dense
-      ><span class="text-h6 q-mx-sm">Logout</span></q-btn
-    >
-
-    Logged in as {{ authUser ? authUser.first_name : "Anonymous" }}
-
-    <q-space />
-
-    <q-btn class="q-ma-xs" to="/" label="Home" color="black" />
-    <q-btn class="q-ma-xs" to="/dashboard" label="Dashboard" color="black" />
+      ><span class="text-h6 q-mx-sm">Logout</span>
+    </q-btn>
   </q-toolbar>
 </template>
 

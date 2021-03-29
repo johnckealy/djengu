@@ -11,6 +11,7 @@ export default ({ app, router, store, Vue }) => {
       logoutEndpoint: '/logout/',
       tokenRefreshEndpoint: '/token/refresh/',
       userEndpoint: '/user/',
+      registrationEndpoint: '/register/',
       loginRoute: '/login'
     }
 

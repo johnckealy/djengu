@@ -17,10 +17,10 @@
       <q-form @submit="onSubmit" class="q-gutter-md">
         <q-input
           v-model="username"
-          label="Username"
+          label="Email"
           lazy-rules="ondemand"
           :rules="[
-            (val) => (val && val.length > 0) || 'Please provide your username',
+            (val) => (val && val.length > 0) || 'Please provide your email',
           ]"
           outlined
         />
@@ -36,19 +36,26 @@
           outlined
         />
 
-        <div class="text-body1 text-red" v-if="loginErrorMessage">
-          There was a problem logging you in. Please check your details.
+
+        <div v-if="errorMessages" class="text-body1 text-red">
+          <p v-for="(message,i) in errorMessages" :key="i" >
+            <q-icon color="red" size="18px" name="error_outline" />
+            {{ message }}
+          </p>
         </div>
+
+        <span class="text-body2 q-pa-md q-ma-md" >Don't have an account? Register <a href="/register">here.</a> </span>
 
         <div>
           <q-btn
             no-caps
             glossy
             class="q-ml-md full-width q-mx-auto"
-            label="Submit"
             type="submit"
             color="primary"
-          />
+          >{{ loading ? 'Logging in...' : 'Login' }}
+           <q-spinner-ball class="q-mx-lg" v-if="loading" color="white" />
+          </q-btn>
         </div>
       </q-form>
     </q-card>
@@ -62,27 +69,30 @@ export default {
       username: null,
       password: null,
       loginErrorMessage: false,
+      errorMessages: [],
+      loading: false
     };
   },
   methods: {
     async onSubmit() {
-      const loginOk = await this.$auth.login({
+      this.loading = true;
+      const response = await this.$auth.login({
         username: this.username,
         password: this.password
       })
-      if (loginOk) {
+      if (response.status === 200) {
         this.$q.notify({ message: "Login was successful" });
-        this.$route.path == this.$store.state.authenticator.redirectUrl
-          ? this.$router.go()
-          : this.$router.push(this.$store.state.authenticator.redirectUrl);
-      } else {
+        this.$router.push(this.$auth.redirectUrl());
+      }
+      else {
         this.$q.notify({
-          message: "Login was not successful!",
+          message: "Registration failed!",
           color: "red-6",
           icon: "error",
         });
-        this.loginErrorMessage = true;
+        this.errorMessages = response;
       }
+      this.loading = false;
     },
   },
 };

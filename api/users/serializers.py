@@ -1,29 +1,24 @@
 from rest_framework import  serializers
 from django.contrib.auth.models import User
+from dj_rest_auth.registration.serializers import RegisterSerializer
+from .models import Profile
 
 
-class  RegisterSerializer(serializers.ModelSerializer):
+class CustomRegisterSerializer(RegisterSerializer):
+    """Add a first name field to the default user registration."""
+    first_name = serializers.CharField(required=True, write_only=True)
 
-    class Meta:
-        model = User
-        fields = ('id', 'username', 'email', 'password', 'first_name', 'last_name')
-        extra_kwargs = {
-            'password': {'write_only': True},
+    def get_cleaned_data(self):
+        return {
+            'first_name': self.validated_data.get('first_name', ''),
+            'username': self.validated_data.get('username', ''),
+            'password1': self.validated_data.get('password1', ''),
+            'email': self.validated_data.get('email', ''),
         }
 
-    def create(self, validated_data):
-        user = User.objects.create_user(
-            username = validated_data['username'],
-            email = validated_data['email'],
-            first_name = validated_data['first_name'],
-            last_name = validated_data['last_name'],
-            password = validated_data['password'],
-        )
-        return user
 
-
-class UserSerializer(serializers.ModelSerializer):
-
+class ProfileSerializer(serializers.ModelSerializer):
+    """Everything from the user model including the custom user fields."""
     class Meta:
-        model = User
-        fields = ['pk', 'username', 'email', 'first_name']
+        model = Profile
+        fields = "__all__"
