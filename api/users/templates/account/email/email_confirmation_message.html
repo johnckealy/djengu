@@ -1,0 +1,40 @@
+{% load account %}
+{% user_display user as user_display %}
+{% autoescape off %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Confirmation</title>
+  <style>
+    .verify-btn {
+      font-size: 17px;
+      margin: 25px;
+      padding: 12px;
+      background-color: #993939;
+      color: white;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>Please confirm your email address</h2>
+
+    <p>This is to verify your email address. To do so, please click the button below:</p>
+    <a href="{{ activate_url }}">
+      <button class="verify-btn">
+        Verify Email
+      </button>
+    </a>
+
+  <h4>Thank you!</h4>
+
+  {% endautoescape %}
+</body>
+</html>

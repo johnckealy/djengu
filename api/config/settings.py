@@ -53,7 +53,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [ os.path.join(BASE_DIR, 'users/templates'), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -143,6 +143,11 @@ REST_FRAMEWORK = {
     ]
 }
 
+REST_AUTH_REGISTER_SERIALIZERS = {
+    'REGISTER_SERIALIZER': 'users.serializers.CustomRegisterSerializer',
+    'PASSWORD_RESET_SERIALIZER': 'users.serializers.CustomPasswordResetSerializer'
+}
+
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
@@ -151,7 +156,7 @@ SIMPLE_JWT = {
 
 # dj-rest-auth authentication settings
 SITE_ID = 1
-REST_SESSION_LOGIN = False
+# REST_SESSION_LOGIN = False
 REST_USE_JWT = True
 JWT_AUTH_COOKIE = 'jwt-access-token'
 JWT_AUTH_REFRESH_COOKIE = 'jwt-refresh-token'
@@ -161,10 +166,25 @@ JWT_AUTH_SECURE = True
 # if DEBUG:
 WHITENOISE_AUTOREFRESH = True
 
-# Email (This is also needed for dj-rest-auth's /registration/ endpoint)
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # CORS
 CORS_ALLOWED_ORIGINS = [os.environ.get('ORIGIN_URL')]
 CORS_ALLOW_CREDENTIALS = True
 
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+ACCOUNT_EMAIL_SUBJECT_PREFIX = 'Djengu: '
+ACCOUNT_EMAIL_REQUIRED = False
+ACCOUNT_EMAIL_VERIFICATION = 'optional'
+
+LOGIN_REDIRECT_URL = "/register/email-verified"

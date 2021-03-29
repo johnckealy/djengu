@@ -54,8 +54,11 @@
           outlined
         />
 
-        <div v-if="errorMessages" class="text-body1 text-red">
-          <p v-for="(message,i) in errorMessages" :key="i" >{{ message }}</p>
+       <div v-if="errorMessages" class="text-body1 text-red">
+          <p v-for="(message,i) in errorMessages" :key="i" >
+            <q-icon color="red" size="18px" name="error_outline" />
+            {{ message }}
+          </p>
         </div>
 
         <span class="text-body2 q-pa-md q-ma-md" >Already have an account? Login <a href="/login">here.</a> </span>
@@ -101,7 +104,7 @@ export default {
       });
       if (resp.status == 201) {
         this.$q.notify({ message: "Account created successfully" });
-        this.$router.push('/login')
+        this.$router.push('/request-email-confirmation')
       } else {
         this.$q.notify({
           message: "Registration failed!",

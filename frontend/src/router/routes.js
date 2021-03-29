@@ -7,6 +7,11 @@ const routes = [
       { path: '', component: () => import('pages/Index.vue') },
       { path: '/login', component: () => import('pages/login.vue') },
       { path: '/register', component: () => import('pages/register.vue') },
+      {
+        path: '/request-email-confirmation',
+        component: () => import('pages/request-email-confirmation.vue'),
+        meta: { requiresAuth: true }
+      }
     ]
   },
   {

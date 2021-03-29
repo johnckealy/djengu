@@ -2,6 +2,7 @@ from rest_framework import  serializers
 from django.contrib.auth.models import User
 from dj_rest_auth.registration.serializers import RegisterSerializer
 from .models import Profile
+from dj_rest_auth.serializers import PasswordResetSerializer
 
 
 class CustomRegisterSerializer(RegisterSerializer):
@@ -15,6 +16,18 @@ class CustomRegisterSerializer(RegisterSerializer):
             'password1': self.validated_data.get('password1', ''),
             'email': self.validated_data.get('email', ''),
         }
+
+
+
+class CustomPasswordResetSerializer(PasswordResetSerializer):
+    def get_email_options(self):
+        return {
+            'extra_email_context': {
+                'pass_reset_obj':{ 'this_thing': 'This is the this thing'}
+            },
+            'Hlloe': 'Yea'
+        }
+
 
 
 class ProfileSerializer(serializers.ModelSerializer):

@@ -1,0 +1,19 @@
+
+
+{% load account %}
+{% user_display user as user_display %}
+{% autoescape off %}
+
+Hello!
+
+
+You're receiving this e-mail because user {{ user_display }} has given your e-mail address to
+register an account. To confirm this is correct, go to
+
+{{ activate_url }}
+
+
+Thank you!
+
+{% endautoescape %}
+

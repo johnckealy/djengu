@@ -1,12 +1,15 @@
+import os
+from django.views.generic import TemplateView
 from rest_framework import generics
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
+from allauth.account.utils import send_email_confirmation
 from .serializers import ProfileSerializer
 from .models import Profile
 
 
 class ProfileDetail(generics.GenericAPIView):
-
+    """An extension of the User model for custom logic about the user."""
     permission_classes = [ IsAuthenticated ]
     serializer_class = ProfileSerializer
 
@@ -33,8 +36,22 @@ class ProfileDetail(generics.GenericAPIView):
 
 
 
-class VerifyEmailView(generics.GenericAPIView):
+class EmailVerifiedView(TemplateView):
+    """Returns the HTML template for the confirm registration email"""
+    template_name = "confirmed_email.html"
 
-    def get(self, request, *args, **kwargs):
-        return Response({ 'message': 'Email verified?'})
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['home_url'] = os.environ.get('ORIGIN_URL')
+        return context
+
+
+class ResendEmailConfirmation(generics.GenericAPIView):
+    """Resends the registration confirmation email."""
+    permission_classes = (AllowAny,)
+
+    def get(self, request):
+        send_email_confirmation(request._request, request.user)
+        return Response({'message': 'Email confirmation re-sent'})
+
 
