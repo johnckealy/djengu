@@ -8,11 +8,6 @@
 
         <q-toolbar-title class="q-mx-sm"> Login </q-toolbar-title>
 
-        <q-btn
-          flat
-          round
-          dense
-        />
       </q-toolbar>
       <q-form @submit="onSubmit" class="q-gutter-md">
         <q-input
