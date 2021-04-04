@@ -58,8 +58,8 @@ elif [[ ${FLAVOUR} = static ]]; then
 fi
 
 # Detach djengu's history from the new project
-rm -rf .git/
-git init
+# rm -rf .git/
+# git init
 
 # User inputs
 echo
@@ -69,9 +69,11 @@ echo
 read -p "Set a database name: " SQL_DATABASE
 read -sp "Set a database password: " SQL_PASSWORD
 echo
-read -p "Choose a frontend URL (e.g. example.com): " FRONTEND_URL
-echo -e  "Choose a backend URL ${ORANGE}(this must have the same apex"
-read -p "domain as the frontend URL, e.g. api.example.com): " BACKEND_URL
+echo -e  "Choose a frontend URL (e.g. ${BLUE}example.com${NC})\c:"
+read -p ": " FRONTEND_URL
+echo -e  "Choose a backend URL (${ORANGE}this must have the same apex"
+echo -e  "domain as the frontend URL, e.g. ${BLUE}api.example.com${NC})\c:"
+read -p ": " BACKEND_URL
 echo
 echo -e "${GREEN}Great! If you need to change these options"
 echo "later, you'll find them in the env/ directory."
@@ -79,6 +81,7 @@ echo
 echo -e "${ORANGE}We're now ready to set up Djengu. This"
 echo "may a minute."
 echo -e "${BLUE}"
+
 
 export SQL_USER
 export SQL_DATABASE
