@@ -4,7 +4,7 @@
 <img src="https://raw.githubusercontent.com/johnckealy/djengu/main/frontend/src/assets/djengu-logo.svg"
      alt="logo image" width="230" />
 
-<em> A full production and dev environment for Django and Vue. </em>
+<em> A full production and development environment for Django and Vue. </em>
 
 Djengu is a framework for creating decoupled web applications with Django and Vue.
 It's essentially a full-stack cookie-cutter. Most of the the heavy lifting in
@@ -23,7 +23,7 @@ but this will extend to OSX soon.
 
 First, clone the repository, replacing `myproject` below with your desired project name.
 ```bash
-git clone git@github.com:johnckealy/djengu.git myproject
+git clone https://github.com/johnckealy/djengu.git myproject
 cd myproject
 ```
 
@@ -195,10 +195,6 @@ Feel free to add your own `Make` recipes to the file.
 
 #### `make`
 Run the set up script.
-
-#### `make build-*`
-See the make file for the various options. This runs the various
-builders for the backend and frontend.
 
 #### `make build-*`
 See the make file for the various options. This runs the various
