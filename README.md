@@ -34,11 +34,11 @@ make
 
 After a quick initial set up, you can run
 ```bash
-make frontend-serve
+make backend-serve
 ```
 then, in a new tab, run
 ```bash
-make backend-serve
+make frontend-serve
 ```
 and your application will be ready.
 
@@ -83,7 +83,7 @@ directory until the code is moved to your VPS), as well as your preferrred Postg
 Then, you can simply enter the `/vagrant` directory and run
 
 ```
-make deploy-prod
+make deploy
 ```
 
 Finally, you must enter your Vagrant instance's IP address in `/etc/hosts` and associate a
@@ -99,10 +99,11 @@ speed, but less flexibility. Djengu will install with the
 following technologies.
 
 Django Rest Framework
+– Make
+– Django / Django Rest Framework
 – Quasar Framework (a Vue.js framework)
 – PostgreSQL
 – Docker
-– Make
 – Vagrant
 – Github Actions
 – JWT authentication
@@ -126,7 +127,7 @@ instance. This is done using CaddyServer's built-in reverse
 proxy capability.
 
 Everything is controlled from the `Caddyfile`, which will
-install at `/caddy/Caddyfile` in production. You can add
+install at `/caddy/Caddyfile` in the vagrant VM. You can add
 extra applications and then reference the docker containers.
 The important thing to remember when doing this is to use
 unique port numbers for each instance, and reference these
