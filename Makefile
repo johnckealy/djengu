@@ -38,7 +38,7 @@ clean:
 
 deploy: env-prod env-sub build-prod-frontend
 	echo "Building ${ENVIRONMENT} Environment"
-	docker-compose up --build
+	docker-compose up --build -d
 
 decrypt-dotenv: env-dev
 	gpg --quiet --batch --yes --decrypt --passphrase=ENCRYPTION_KEY env.tar.gpg | tar -x

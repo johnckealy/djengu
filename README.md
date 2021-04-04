@@ -186,6 +186,60 @@ password: secret
 You can also log in with username `admin` and the admin password
 you entered during setup.
 
+
+### API
+
+Djengu applications are based on a `Makefile`, which you'll find
+in the root directory. Here's a summary of what is possible.
+Feel free to add your own `Make` recipes to the file.
+
+##### `make`
+Run the set up script.
+
+##### `make build-*`
+See the make file for the various options. This runs the various
+builders for the backend and frontend.
+
+##### `make build-*`
+See the make file for the various options. This runs the various
+builders for the backend and frontend.
+
+##### `make configure-vagrant`
+Run this to setup the Vagrant virtual machine. The initial
+run of this command will set up the virtual machine based
+on the `.djengu/.production_toolbox/server_setup.sh` set
+up script. You can also use this script on a real server,
+for example when initializing a digitalocean droplet.
+
+##### `make clean`
+Remove all build files and start everything fresh.
+
+##### `make deploy`
+Deploy the application on the production server (or vagrant VM)
+
+##### `make decrypt-dotenv`
+You'll need to run this command outside of the `make` recipe,
+because you must replace `foo` with the actual key. DO NOT
+ADD THE DECRYPTION KEY TO THE MAKEFILE.
+
+##### `make encrypt-dotenv`
+Encrypt the `env/` folder. Running this recipe will prompt you
+to create an encryption passphrase. You can add this passphrase
+as a Github secret to allow Github actions to apply the CI/CD.
+
+The recipe will create a file named `env.tar.gpg`. You may check
+this file into version control, just be sure not to check in any
+reference to the decryption passphrase. Use the command in
+`make decrypt-dotenv` to decypt on the server, or in CI/CD.
+
+##### `make frontend-serve`
+Run the development environment for the frontend.
+
+##### `make backend-serve`
+Run the development environment for the backend.
+
+
+
 ### Contribute
 
 Feel free to raise a Github issue with bugs and feature suggestions. You
