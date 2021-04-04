@@ -11,6 +11,42 @@ all:
 build-dev: env-dev build-python migrations run-django-scripts
 	cd frontend && npm i
 
+build-python:
+	virtualenv -p $(PYTHON) $(ENV_DIR)
+	$(IN_ENV) && pip3 install -r api/requirements.txt
+
+build-dev-frontend: env-dev
+	cd frontend && npm i && npx quasar build -m ssr
+
+build-prod-frontend: env-prod
+	cd frontend && npm i && npx quasar build -m ssr
+
+backend-serve: env-dev migrations
+	$(IN_ENV) && python $(DJANGO_MANAGE) runsslserver
+
+configure-vagrant:
+	@sudo ./.djengu/.production_toolbox/vagrant_etchosts.sh
+	@./.djengu/.production_toolbox/caddy/vagrant_caddy.sh
+
+clean:
+	@rm -rf $(ENV_DIR)
+	@rm -rf node_modules frontend/node_modules
+	@rm -rf package-lock.json frontend/package-lock.json
+	@rm -rf frontend/dist frontend/src-ssr
+	@rm -rf .pytest_cache
+	@rm -rf sqlite.db
+	@echo "Environment cleaned."
+
+deploy-prod: env-prod env-sub build-prod-frontend
+	echo "Building ${ENVIRONMENT} Environment"
+	docker-compose up --build
+
+decrypt-dotenv: env-dev
+	gpg --quiet --batch --yes --decrypt --passphrase=ENCRYPTION_KEY env.tar.gpg | tar -x
+
+encrypt-dotenv:
+	tar -c env/ | gpg --symmetric -c -o env.tar.gpg
+
 env-dev:
 	$(eval include env/.env.dev)
 	$(eval export $(shell sed 's/=.*//' env/.env.dev))
@@ -26,22 +62,8 @@ env-prod:
 env-sub: env-prod
 	@envsubst < "docker-compose.prod.yml" > "docker-compose.yml"
 
-deploy-prod: env-prod env-sub build-prod-frontend
-	echo "Building ${ENVIRONMENT} Environment"
-	docker-compose up --build
-
-build-python:
-	virtualenv -p $(PYTHON) $(ENV_DIR)
-	$(IN_ENV) && pip3 install -r api/requirements.txt
-
-build-dev-frontend: env-dev
-	cd frontend && npm i && npx quasar build -m ssr
-
-build-prod-frontend: env-prod
-	cd frontend && npm i && npx quasar build -m ssr
-
-backend-serve: env-dev migrations
-	$(IN_ENV) && python $(DJANGO_MANAGE) runsslserver
+flush-the-database-yes-really: env-dev
+	$(IN_ENV) && python $(DJANGO_MANAGE) flush
 
 frontend-serve: env-dev
 	cd frontend && npx quasar dev -m ssr
@@ -56,27 +78,6 @@ migrations: env-dev
 	$(IN_ENV) && python $(DJANGO_MANAGE) makemigrations --noinput
 	$(IN_ENV) && python $(DJANGO_MANAGE) migrate --noinput
 
-flush-the-database-yes-really: env-dev
-	$(IN_ENV) && python $(DJANGO_MANAGE) flush
-
 test: env-test build-python
 	$(IN_ENV) && export DJANGO_SETTINGS_MODULE=api.config.settings && export SQL_ENGINE=django.db.backends.sqlite3 && export SQL_DATABASE=:memory: && $(PYTHON) -m pytest api/tests/
 
-encrypt-dotenv:
-	tar -c env/ | gpg --symmetric -c -o env.tar.gpg
-
-decrypt-dotenv: env-dev
-	gpg --quiet --batch --yes --decrypt --passphrase=ENCRYPTION_KEY env.tar.gpg | tar -x
-
-configure-vagrant:
-	@sudo ./.djengu/.production_toolbox/vagrant_etchosts.sh
-	@./.djengu/.production_toolbox/caddy/vagrant_caddy.sh
-
-clean:
-	@rm -rf $(ENV_DIR)
-	@rm -rf node_modules frontend/node_modules
-	@rm -rf package-lock.json frontend/package-lock.json
-	@rm -rf frontend/dist frontend/src-ssr
-	@rm -rf .pytest_cache
-	@rm -rf sqlite.db
-	@echo "Environment cleaned."

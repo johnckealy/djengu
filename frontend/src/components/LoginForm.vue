@@ -77,7 +77,7 @@ export default {
       })
       if (response.status === 200) {
         this.$q.notify({ message: "Login was successful" });
-        this.$router.push(this.$auth.redirectUrl());
+        this.$router.push('/dashboard');
       }
       else {
         this.$q.notify({
