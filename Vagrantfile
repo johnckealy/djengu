@@ -12,7 +12,7 @@ Vagrant.configure("2") do |config|
     mv /home/vagrant/caddy/ /
     mkdir /root/.ssh/
     touch /root/.ssh/authorized_keys
-    # /home/vagrant/server_setup.sh
+    /home/vagrant/server_setup.sh
     cd /caddy/ && docker-compose -f docker-compose.caddy.yml up --build -d
     usermod -aG docker vagrant
   SHELL

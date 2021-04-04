@@ -1,8 +1,9 @@
-name: deploy-prod
+name: deploy
 
 on:
   push:
     branches:
+      # Replace none with your desired branch (e.g. - main)
       - none
 
 
@@ -15,7 +16,7 @@ jobs:
         with:
           fetch-depth: 1
       - name: Run tests
-        run: sudo apt-get update -y && sudo apt-get install python3.8 -y &&  sudo apt-get install python-virtualenv -y && make test
+        run: sudo apt-get update -y && sudo apt-get install python3.8 -y && sudo apt-get install python3-virtualenv -y && make test
 
 
   build:
@@ -26,19 +27,21 @@ jobs:
     - name: copy file via scp
       uses: appleboy/scp-action@master
       with:
+        # Add each of these fields as a Github "Secret"
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.SSHKEY }}
         port: ${{ secrets.PORT }}
         source: "./*"
-        target: "./quasar-django-templates"
+        # Replace ./djengu with the name of your root directory
+        target: "./djengu"
 
 
   deploy:
     runs-on: ubuntu-latest
     needs: build
     steps:
-    - name: Deploy Flora
+    - name: Deploy App
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.HOST }}
@@ -46,5 +49,6 @@ jobs:
         key: ${{ secrets.SSHKEY }}
         port: ${{ secrets.PORT }}
         command_timeout: 200m
-        script:  cd quasar-django-templates/ && make deploy-prod
+        # Replace ./djengu with the name of your root directory
+        script:  cd djengu/ && make deploy
 
