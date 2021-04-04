@@ -58,8 +58,8 @@ elif [[ ${FLAVOUR} = static ]]; then
 fi
 
 # Detach djengu's history from the new project
-# rm -rf .git/
-# git init
+rm -rf .git/
+git init
 
 # User inputs
 echo
