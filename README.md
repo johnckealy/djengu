@@ -211,6 +211,10 @@ on the `.djengu/.production_toolbox/server_setup.sh` set
 up script. You can also use this script on a real server,
 for example when initializing a digitalocean droplet.
 
+If you make changes to domain name or any other server
+related settings in the `.env.prod` file, remember to
+re-run this recipe. 
+
 ##### `make clean`
 Remove all build files and start everything fresh.
 
