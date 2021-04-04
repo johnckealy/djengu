@@ -70,7 +70,8 @@ read -p "Set a database name: " SQL_DATABASE
 read -sp "Set a database password: " SQL_PASSWORD
 echo
 read -p "Choose a frontend URL (e.g. example.com): " FRONTEND_URL
-read -p "Choose a backend URL (e.g. api.example.com): " BACKEND_URL
+echo  "Choose a backend URL (this must have the same apex"
+read -p "domain as the frontend URL, e.g. api.example.com): " BACKEND_URL
 echo
 echo -e "${GREEN}Great! If you need to change these options"
 echo "later, you'll find them in the env/ directory."
