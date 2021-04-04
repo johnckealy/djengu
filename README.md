@@ -46,8 +46,8 @@ and your application will be ready.
 NOTE: If you chose the option that includes `authentication` during setup, you will
 find that the development environment runs with SSL. You'll need to self-sign
 the cert – this is as simple as "accepting the risk" when prompted by your browser.
-You may also need to do this for your backend address as well (just click `VISIT DJANGO API`)
-on the home page.
+You may also need to do this for your backend address as well (just click `VISIT DJANGO API`
+on the home page).
 
 
 ## Installation
@@ -105,7 +105,7 @@ make deploy
 ```
 
 This will simulate a real deployment. To see the application, simply visit the domain
-you enter during the set up. If you tweak this domain, or any other settings that
+you entered during the set up. If you tweak this domain, or any other settings that
 may affect the CaddyServer, remember to re-run `make configure-vagrant` from your
 local machine (not the VM).
 
@@ -131,8 +131,7 @@ choices have already been made. This results in more simplicity and
 speed, but less flexibility. Djengu will install with the
 following technologies.
 
-Django Rest Framework
-– Make
+Make
 – Django / Django Rest Framework
 – Quasar Framework (a Vue.js framework)
 – PostgreSQL
@@ -141,7 +140,7 @@ Django Rest Framework
 – Github Actions
 – JWT authentication
 – Dj Rest Auth
-– Server-side rendering (SSR) on the frontend
+– Server-side rendering (SSR)
 
 If you'd like to see more choices, please consider contributing to the
 project.
@@ -155,16 +154,17 @@ use vscode, just go ahead and delete this directory.
 ## Hosting multiple web applications on the same server instance
 
 Because Djengu is decoupled by design, it is possible to host
-several completely indendent applications on the same server
-instance. This is done using CaddyServer's built-in reverse
-proxy capability.
+several completely independent applications on the same server
+instance. This is done using CaddyServer's built-in reverse-proxy.
 
 Everything is controlled from the `Caddyfile`, which will
 install at `/caddy/Caddyfile` in the vagrant VM. You can add
 extra applications and then reference the docker containers.
 The important thing to remember when doing this is to use
 unique port numbers for each instance, and reference these
-port numbers in the `Caddyfile`.
+port numbers in the `Caddyfile`. In production, you may place the `caddy/`
+directory anywhere you wish, but you must add each individual
+application to the same `Caddyfile`.
 
 ## Flavours
 
@@ -194,7 +194,7 @@ in the root directory. Here's a summary of what is possible.
 Feel free to add your own `Make` recipes to the file.
 
 #### `make`
-Run the set up script.
+Run the setup script.
 
 #### `make build-*`
 See the make file for the various options. This runs the various
@@ -205,17 +205,17 @@ Run this to setup the Vagrant virtual machine. The initial
 run of this command will set up the virtual machine based
 on the `.djengu/.production_toolbox/server_setup.sh` set
 up script. You can also use this script on a real server,
-for example when initializing a digitalocean droplet.
+e.g. when initializing a DigitalOcean droplet.
 
-If you make changes to domain name or any other server
+If you make changes to any domain names or any other server
 related settings in the `.env.prod` file, remember to
-re-run this recipe. 
+re-run this recipe.
 
 #### `make clean`
 Remove all build files and start everything fresh.
 
 #### `make deploy`
-Deploy the application on the production server (or vagrant VM)
+Deploy the application on the production server (or vagrant VM).
 
 #### `make decrypt-dotenv`
 You'll need to run this command outside of the `make` recipe,
@@ -229,8 +229,9 @@ as a Github secret to allow Github actions to apply the CI/CD.
 
 The recipe will create a file named `env.tar.gpg`. You may check
 this file into version control, just be sure not to check in any
-reference to the decryption passphrase. Use the command in
-`make decrypt-dotenv` to decypt on the server, or in CI/CD.
+reference to the decryption passphrase. Use the command inside
+the `make decrypt-dotenv` recipe to decypt on the server, or in CI/CD
+(use the command, not the recipe itself, since the key must be set manually).
 
 #### `make frontend-serve`
 Run the development environment for the frontend.
