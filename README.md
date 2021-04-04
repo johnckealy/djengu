@@ -20,10 +20,10 @@ Vue CLI and Nuxt.js will be added soon.
 
 ### Quick start
 
-First, clone the repository.
+First, clone the repository, replacing `myproject` below with your repo name.
 ```bash
-git clone git@github.com:johnckealy/djengu.git
-cd djengu
+git clone git@github.com:johnckealy/djengu.git myproject
+cd myproject
 ```
 
 Djengu is controlled by a `Makefile`. To start, simply run
@@ -139,8 +139,6 @@ Djengu currently has three choices (more will be added as the project progresses
 1) `Basic`: Creates a basic Quasar and Django application.
 
 2) `Authentication`: Django and Quasar with JWT token authentication out of the box
-
-3) `Static-site`: Runs a basic Quasar application with no Django backend
 
 ### Test Users
 

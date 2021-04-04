@@ -4,14 +4,14 @@ import os
 
 
 def run():
-    """Script to create two test users, one for John and one for Admin."""
+    """Script to create two test users, one for Guest and one for Admin."""
     LOG.info(f"\nCreating test users...")
-    if not User.objects.filter(username='john@email.com').exists():
-        user=User.objects.create_user(username='john@email.com', email='john@email.com', first_name="John", password='asdf')
+    if not User.objects.filter(username='guest@email.com').exists():
+        user=User.objects.create_user(username='guest@email.com', email='guest@email.com', first_name="Guest", password='secret')
         user.is_superuser=False
         user.is_staff=False
         user.save()
-        LOG.info(f"\n{L.SUCCESS} Normal User 'john@email.com' created.{L.ENDC}\n")
+        LOG.info(f"\n{L.SUCCESS} Normal User 'guest@email.com' created.{L.ENDC}\n")
 
     if not User.objects.filter(username='admin').exists():
         user = User.objects.create_user(username='admin', email='admin@email.com',

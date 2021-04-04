@@ -57,6 +57,9 @@ elif [[ ${FLAVOUR} = static ]]; then
     git checkout static-site
 fi
 
+# Detach djengu's history from the new project
+rm -rf .git/
+
 # User inputs
 echo
 read -p "Pick a username: " SQL_USER
@@ -115,11 +118,26 @@ echo
 echo "--------------------------------------------------------"
 echo
 
+# Final set up steps
+while true; do
+    echo "The Djengo files can now safely be removed, but you"
+    echo "should keep them if you wish to use the vagrant virtual"
+    echo "machine for testing production."
+    echo -e "${BLUE}"
+    read -p "Remove them now? (Y/n) " yn
+    case $yn in [Yy]* )
+        rm -rf ./.djengu/
+        echo "Files removed."
+        break;;
+        [Nn]* ) exit;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
 
 while true; do
-    read -p "The Djengo files are now redundant. Remove them? (Y/n) " yn
+    echo -p "${NC}Initalize a new Git repository? (Y/n) " yn
     case $yn in [Yy]* )
-        echo "Files removed."
+        git init
         break;;
         [Nn]* ) exit;;
         * ) echo "Please answer yes or no.";;
