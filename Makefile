@@ -25,8 +25,8 @@ backend-serve: env-dev migrations
 	$(IN_ENV) && python $(DJANGO_MANAGE) runserver
 
 configure-vagrant:
-	@sudo ./.djengu/.production_toolbox/vagrant_etchosts.sh
-	@./.djengu/.production_toolbox/caddy/vagrant_caddy.sh
+	sudo ./.djengu/.production_toolbox/vagrant_etchosts.sh
+	./.djengu/.production_toolbox/caddy/vagrant_caddy.sh
 
 clean:
 	@rm -rf $(ENV_DIR)
