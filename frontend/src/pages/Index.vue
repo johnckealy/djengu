@@ -2,16 +2,15 @@
   <q-page class="flex column flex-center">
     <img alt="Djengu logo" src="~assets/djengu-logo.svg" width="400px" />
     <div>
-      <a href="https://github.com" target="_blank">
+      <a href="https://github.com/johnckealy/djengu" target="_blank">
         <q-btn
-          href="http://api.djengu.johnkealy.com:8000"
           label="Documentation"
           glossy
           class="q-ma-lg"
           color="primary"
         />
       </a>
-      <a href="http://api.djengu.johnkealy.com" target="_blank">
+      <a :href="apiURL" target="_blank">
         <q-btn
           label="visit Django API"
           glossy
@@ -25,6 +24,10 @@
 
 <script>
 export default {
-  name: "PageIndex",
+  computed: {
+    apiURL() {
+      return `${process.env.API_URL}/admin`
+    }
+  }
 };
 </script>
