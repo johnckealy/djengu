@@ -8,8 +8,9 @@ IN_ENV=. $(ENV_DIR)/bin/activate
 all:
 	@./.djengu/create.sh
 
-build-dev: env-dev build-python migrations run-django-scripts build-dev-frontend
-
+build-dev: env-dev build-python migrations run-django-scripts
+	cd frontend && npm i
+	
 build-python:
 	virtualenv -p $(PYTHON) $(ENV_DIR)
 	$(IN_ENV) && pip3 install -r api/requirements.txt
