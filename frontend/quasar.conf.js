@@ -29,7 +29,7 @@ module.exports = function (/* ctx */) {
     devServer: {
       https: true,
       port: 8080,
-      open: false,
+      open: true,
       hot: true,
       host: process.env.ORIGIN_URL.replace(/^http(s|):\/\//g, '').replace(/:\d{4}$/g, ''),
       disableHostCheck: true,

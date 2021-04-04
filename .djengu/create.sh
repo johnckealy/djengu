@@ -135,7 +135,7 @@ while true; do
 done
 
 while true; do
-    echo -p "${NC}Initalize a new Git repository? (Y/n) " yn
+    read -p "${NC}Initalize a new Git repository? (Y/n) " yn
     case $yn in [Yy]* )
         git init
         break;;
