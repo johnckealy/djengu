@@ -81,7 +81,7 @@ export default {
       }
       else {
         this.$q.notify({
-          message: "Registration failed!",
+          message: "Login failed!",
           color: "red-6",
           icon: "error",
         });
