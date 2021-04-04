@@ -8,7 +8,7 @@ IN_ENV=. $(ENV_DIR)/bin/activate
 all:
 	@./.djengu/create.sh
 
-build-dev: env-dev build-python migrations run-django-scripts
+build-dev: env-dev build-python migrations run-django-scripts build-dev-frontend
 
 build-python:
 	virtualenv -p $(PYTHON) $(ENV_DIR)
@@ -64,7 +64,7 @@ flush-the-database-yes-really: env-dev
 	$(IN_ENV) && python $(DJANGO_MANAGE) flush
 
 frontend-serve: env-dev
-	cd frontend && quasar dev -m ssr
+	cd frontend && npx quasar serve -m ssr
 
 frontend-prod-serve: env-prod
 	cd frontend/dist/ssr/ && npm run start

@@ -7,7 +7,7 @@
 <em> A full production and dev environment for Django and Vue. </em>
 
 Djengu is a framework for creating decoupled web applications with Django and Vue.
-It's essentially a cross-platform cookie-cutter. Most of the the heavy lifting in
+It's essentially a full-stack cookie-cutter. Most of the the heavy lifting in
 setting up both development and production environments is taken care of, such as
 server set-up, mock environments, containerization, SSL/TLS, DNS, testing, and much more.
 
