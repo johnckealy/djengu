@@ -16,7 +16,8 @@ Djengu will create everything you need, then quietly remove itself –
 leaving you with a clean, reliable, production-ready Django/Vue application.
 
 At the moment, Djengu is limited to Django and Quasar Framework. Support for
-Vue CLI and Nuxt.js will be added soon.
+Vue CLI and Nuxt.js will be added soon. The tool is currently tested for Linux,
+but this will extend to OSX soon.
 
 ### Quick start
 
@@ -67,29 +68,55 @@ simply remove it.
 
 Create the environment with
 ```bash
-vagrant up
+make configure-vagrant
 ```
-followed by
+This may take a few minutes the first time it is run.
+
+When the VM is set up, you may enter it using
 ```bash
 vagrant ssh
 ```
 
-Firstly,
-a separate Docker container running an instance of `CaddyServer` must be spun up.
+If the setup completed successfully, there should be an instance of CaddyServer running in the VM.
+You may verify this using
+```
+docker ps
+```
+If there are any issues at this stage, `cd` into the `/caddy` directory in the VM and check
+the `Caddyfile` for any errors.
 
-Edit the `env/.env.prod` file to specify your directory structure on your VPS (keep the `/vagrant`
-directory until the code is moved to your VPS), as well as your preferrred PostgreSQL settings.
+Now, `cd` into the `/djengu` directory in the VM. You should see your project. If you make
+an edit in your local machine, Vagrant will mirror these changes in the VM, allowing you to
+tweak your production settings without needing to make changes in two different places.
 
-Then, you can simply enter the `/vagrant` directory and run
+Before running the deploy, it's a good idea to check the `env/.env.prod` file to make
+sure your settings are correct.
+
+When you're happy, run
 
 ```
 make deploy
 ```
 
-Finally, you must enter your Vagrant instance's IP address in `/etc/hosts` and associate a
-domain name to it. This must be the same domain name as the one specified in the `Caddyfile`.
-Then hey presto – you have a reverse proxy – you can add new apps with unique domain names simply
-by adding the entry to the Caddyfile and running `make deploy-prod` in the new app.
+This will simulate a real deployment. To see the application, simply visit the domain
+you enter during the set up. If you tweak this domain, or any other settings that
+may affect the CaddyServer, remember to re-run `make configure-vagrant` from your
+local machine (not the VM).
+
+NOTE: The reason you were prompted for a password when running `make configure-vagrant`
+is because Djengu needed access to the `/etc/hosts` file. This is the only change
+Djengu makes to your machine outside of it's own repository. When you're finished
+with the Vagrant testing, it's a good idea to open `/etc/hosts` and remove these lines.
+If you use the same domain for testing and deployment, the hosts entry may
+interfere with your access to the real application.
+
+To remove the VM, run
+```
+vagrant destroy
+```
+from the root directory.
+
+
 
 ### Technologies
 
@@ -108,7 +135,7 @@ Django Rest Framework
 – Github Actions
 – JWT authentication
 – Dj Rest Auth
-
+– Server-side rendering (SSR) on the frontend
 
 If you'd like to see more choices, please consider contributing to the
 project.
