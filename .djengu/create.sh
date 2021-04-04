@@ -27,6 +27,13 @@ then
     echo -e "Please install it before continuing."
     exit
 fi
+if ! which virtualenv &> /dev/null
+then
+    echo -e "${RED}----- virtualenv was not found! ------"
+    echo -e "${NC}Djengu relies on python-virtualenv."
+    echo -e "Please install it before continuing."
+    exit
+fi
 
 flavours=("Basic Django/Quasar" "Django/Quasar with JWT Authentication") #"Static Quasar (with SSR)")
 select fav in "${flavours[@]}"; do
