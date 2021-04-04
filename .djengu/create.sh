@@ -57,9 +57,6 @@ elif [[ ${FLAVOUR} = static ]]; then
     git checkout static-site
 fi
 
-# Detach djengu's history from the new project
-rm -rf .git/
-git init
 
 # User inputs
 echo
@@ -105,6 +102,10 @@ while true; do
         * ) echo "Please answer yes or no.";;
     esac
 done
+
+# Detach djengu's history from the new project
+rm -rf .git/
+git init
 
 echo
 echo -e "--------------------------------------------------------"
