@@ -19,7 +19,7 @@ At the moment, Djengu is limited to Django and Quasar Framework. Support for
 Vue CLI and Nuxt.js will be added soon. The tool is currently tested for Linux,
 but this will extend to OSX soon.
 
-### Quick start
+## Quick start
 
 First, clone the repository, replacing `myproject` below with your desired project name.
 ```bash
@@ -50,7 +50,7 @@ You may also need to do this for your backend address as well (just click `VISIT
 on the home page.
 
 
-### Installation
+## Installation
 
 Djengu requires that the following tools be installed locally before starting.
 
@@ -60,7 +60,7 @@ Djengu requires that the following tools be installed locally before starting.
 
 – npm
 
-### Simulating the production environment
+## Simulating the production environment
 
 Before setting up on a real server, it can be extremely useful to simulate
 the production environment. Djengu makes use of Vagrant, a tool that allows you to make
@@ -85,7 +85,7 @@ vagrant ssh
 
 If the setup completed successfully, there should be an instance of CaddyServer running in the VM.
 You may verify this using
-```
+```bash
 docker ps
 ```
 If there are any issues at this stage, `cd` into the `/caddy` directory in the VM and check
@@ -100,7 +100,7 @@ sure your settings are correct.
 
 When you're happy, run
 
-```
+```bash
 make deploy
 ```
 
@@ -117,14 +117,14 @@ If you use the same domain for testing and deployment, the hosts entry may
 interfere with your access to the real application.
 
 To remove the VM, run
-```
+```bash
 vagrant destroy
 ```
 from the root directory.
 
 
 
-### Technologies
+## Technologies
 
 Because Djengu takes care of a lot of underlying technologies, certain
 choices have already been made. This results in more simplicity and
@@ -146,13 +146,13 @@ Django Rest Framework
 If you'd like to see more choices, please consider contributing to the
 project.
 
-### Vscode
+## Vscode
 
 If you are a Visual Studio Code user, there are some premade scripts
 for running the backend application in the `.vscode/` directory. If you don't
 use vscode, just go ahead and delete this directory.
 
-### Hosting multiple web applications on the same server instance
+## Hosting multiple web applications on the same server instance
 
 Because Djengu is decoupled by design, it is possible to host
 several completely indendent applications on the same server
@@ -166,7 +166,7 @@ The important thing to remember when doing this is to use
 unique port numbers for each instance, and reference these
 port numbers in the `Caddyfile`.
 
-### Flavours
+## Flavours
 
 Djengu currently has three choices (more will be added as the project progresses):
 
@@ -174,7 +174,7 @@ Djengu currently has three choices (more will be added as the project progresses
 
 2) `Authentication`: Django and Quasar with JWT token authentication out of the box
 
-### Test Users
+## Test Users
 
 If you build Djengu with authentication, there is a test
 account built in. The credentials are
@@ -187,24 +187,24 @@ You can also log in with username `admin` and the admin password
 you entered during setup.
 
 
-### API
+## API
 
 Djengu applications are based on a `Makefile`, which you'll find
 in the root directory. Here's a summary of what is possible.
 Feel free to add your own `Make` recipes to the file.
 
-##### `make`
+#### `make`
 Run the set up script.
 
-##### `make build-*`
+#### `make build-*`
 See the make file for the various options. This runs the various
 builders for the backend and frontend.
 
-##### `make build-*`
+#### `make build-*`
 See the make file for the various options. This runs the various
 builders for the backend and frontend.
 
-##### `make configure-vagrant`
+#### `make configure-vagrant`
 Run this to setup the Vagrant virtual machine. The initial
 run of this command will set up the virtual machine based
 on the `.djengu/.production_toolbox/server_setup.sh` set
@@ -215,18 +215,18 @@ If you make changes to domain name or any other server
 related settings in the `.env.prod` file, remember to
 re-run this recipe. 
 
-##### `make clean`
+#### `make clean`
 Remove all build files and start everything fresh.
 
-##### `make deploy`
+#### `make deploy`
 Deploy the application on the production server (or vagrant VM)
 
-##### `make decrypt-dotenv`
+#### `make decrypt-dotenv`
 You'll need to run this command outside of the `make` recipe,
 because you must replace `foo` with the actual key. DO NOT
 ADD THE DECRYPTION KEY TO THE MAKEFILE.
 
-##### `make encrypt-dotenv`
+#### `make encrypt-dotenv`
 Encrypt the `env/` folder. Running this recipe will prompt you
 to create an encryption passphrase. You can add this passphrase
 as a Github secret to allow Github actions to apply the CI/CD.
@@ -236,15 +236,15 @@ this file into version control, just be sure not to check in any
 reference to the decryption passphrase. Use the command in
 `make decrypt-dotenv` to decypt on the server, or in CI/CD.
 
-##### `make frontend-serve`
+#### `make frontend-serve`
 Run the development environment for the frontend.
 
-##### `make backend-serve`
+#### `make backend-serve`
 Run the development environment for the backend.
 
 
 
-### Contribute
+## Contribute
 
 Feel free to raise a Github issue with bugs and feature suggestions. You
 can also send a pull request.
