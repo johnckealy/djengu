@@ -37,7 +37,7 @@ clean:
 	@rm -rf sqlite.db
 	@echo "Environment cleaned."
 
-deploy-prod: env-prod env-sub build-prod-frontend
+deploy: env-prod env-sub build-prod-frontend
 	echo "Building ${ENVIRONMENT} Environment"
 	docker-compose up --build
 
