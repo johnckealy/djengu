@@ -15,10 +15,10 @@ build-python:
 	$(IN_ENV) && pip3 install -r api/requirements.txt
 
 build-dev-frontend: env-dev
-	cd frontend && npm i && npx quasar build -m ssr
+	@cd frontend && npm i && npx quasar build -m ssr
 
 build-prod-frontend: env-prod
-	cd frontend && npm i && npx quasar build -m ssr
+	@cd frontend && npm i && npx quasar build -m ssr
 
 backend-serve: env-dev migrations
 	$(IN_ENV) && python $(DJANGO_MANAGE) runserver
@@ -64,7 +64,7 @@ flush-the-database-yes-really: env-dev
 	$(IN_ENV) && python $(DJANGO_MANAGE) flush
 
 frontend-serve: env-dev
-	cd frontend && npx quasar serve -m ssr
+	cd frontend && npx quasar dev -m ssr
 
 frontend-prod-serve: env-prod
 	cd frontend/dist/ssr/ && npm run start
