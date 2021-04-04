@@ -59,6 +59,7 @@ fi
 
 # Detach djengu's history from the new project
 rm -rf .git/
+git init
 
 # User inputs
 echo
@@ -128,16 +129,6 @@ while true; do
     case $yn in [Yy]* )
         rm -rf ./.djengu/
         echo "Files removed."
-        break;;
-        [Nn]* ) exit;;
-        * ) echo "Please answer yes or no.";;
-    esac
-done
-
-while true; do
-    read -p "${NC}Initalize a new Git repository? (Y/n) " yn
-    case $yn in [Yy]* )
-        git init
         break;;
         [Nn]* ) exit;;
         * ) echo "Please answer yes or no.";;
