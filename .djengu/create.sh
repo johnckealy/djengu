@@ -52,10 +52,13 @@ if [[ ${FLAVOUR} = jwt ]]; then
     git fetch origin authentication
     git checkout authentication
 elif [[ ${FLAVOUR} = basic ]]; then
-    git checkout main >& /dev/null
+    git checkout main
 elif [[ ${FLAVOUR} = static ]]; then
-    git checkout static-site >& /dev/null
+    git checkout static-site
 fi
+
+# Detach djengu's history from the new project
+rm -rf .git/
 
 # User inputs
 echo
@@ -72,7 +75,7 @@ echo -e "${GREEN}Great! If you need to change these options"
 echo "later, you'll find them in the env/ directory."
 echo
 echo -e "${ORANGE}We're now ready to set up Djengu. This"
-echo "will take a moment."
+echo "may a minute."
 echo -e "${BLUE}"
 
 export SQL_USER
@@ -115,11 +118,26 @@ echo
 echo "--------------------------------------------------------"
 echo
 
+# Final set up steps
+while true; do
+    echo "The Djengo files can now safely be removed, but you"
+    echo "should keep them if you wish to use the vagrant virtual"
+    echo "machine for testing production."
+    echo -e "${BLUE}"
+    read -p "Remove them now? (Y/n) " yn
+    case $yn in [Yy]* )
+        rm -rf ./.djengu/
+        echo "Files removed."
+        break;;
+        [Nn]* ) exit;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
 
 while true; do
-    read -p "The Djengo files are now redundant. Remove them? (Y/n) " yn
+    echo -p "${NC}Initalize a new Git repository? (Y/n) " yn
     case $yn in [Yy]* )
-        echo "Files removed."
+        git init
         break;;
         [Nn]* ) exit;;
         * ) echo "Please answer yes or no.";;
