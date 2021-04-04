@@ -1,3 +1,7 @@
+# This is the build file for djengu itself.
+# You should remove it, and use the deploy-prod
+# file to set up your github actions.
+
 name: test-build
 
 on:

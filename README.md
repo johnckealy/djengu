@@ -21,7 +21,7 @@ but this will extend to OSX soon.
 
 ### Quick start
 
-First, clone the repository, replacing `myproject` below with your repo name.
+First, clone the repository, replacing `myproject` below with your desired project name.
 ```bash
 git clone git@github.com:johnckealy/djengu.git myproject
 cd myproject
@@ -42,6 +42,12 @@ then, in a new tab, run
 make frontend-serve
 ```
 and your application will be ready.
+
+NOTE: If you chose the option that includes `authentication` during setup, you will
+find that the development environment runs with SSL. You'll need to self-sign
+the cert – this is as simple as "accepting the risk" when prompted by your browser.
+You may also need to do this for your backend address as well (just click `VISIT DJANGO API`)
+on the home page.
 
 
 ### Installation
