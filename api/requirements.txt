@@ -1,4 +1,4 @@
-Django
+Django==3.1.7
 psycopg2-binary
 gunicorn
 django-cors-headers
