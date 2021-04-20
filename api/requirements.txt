@@ -1,7 +1,7 @@
 ## Base requirements file. After installation, it
 ## is recommended that you pin your versions. You can
 ## do this by running "pip freeze > requirements.txt".
-Django
+Django==3.1.7
 psycopg2-binary
 gunicorn
 django-cors-headers
