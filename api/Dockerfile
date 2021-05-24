@@ -23,8 +23,6 @@ COPY . $APP_HOME
 
 ENV PATH="/home/python_user/.local/bin:$PATH"
 
-RUN bash -c 'pip3 --version'
-
 
 USER python_user
 WORKDIR $APP_HOME
