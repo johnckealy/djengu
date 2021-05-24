@@ -11,8 +11,16 @@ module.exports = function (/* ctx */) {
     ],
 
     extras: [
-      'roboto-font',
-      'material-icons'
+      // 'ionicons-v4',
+      // 'mdi-v5',
+      // 'fontawesome-v5',
+      // 'eva-icons',
+      // 'themify',
+      // 'line-awesome',
+      // 'roboto-font-latin-ext', // this or either 'roboto-font', NEVER both!
+
+      'roboto-font', // optional, you are not bound to it
+      'mdi-v5', // optional, you are not bound to it
     ],
 
     build: {
@@ -36,8 +44,8 @@ module.exports = function (/* ctx */) {
     },
 
     framework: {
-      iconSet: 'material-icons',
-      lang: 'en-us',
+      iconSet: 'mdi-v5', // Quasar icon set
+      lang: 'en-us', // Quasar language pack
       config: {},
       importStrategy: 'auto',
 
