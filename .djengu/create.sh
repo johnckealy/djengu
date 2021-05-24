@@ -94,10 +94,13 @@ export DJANGO_ADMIN_PASSWORD
 export FRONTEND_URL
 export BACKEND_URL
 export SECRET_KEY=`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c45`
+export DJENGU_ROOT=`dirname "${PWD%/*}"`
 
 while true; do
     read -p "Ready? (Y/n) " yn
     case $yn in [Yy]* )
+        envsubst < Vagrantfile_template > Vagrantfile;
+        rm Vagrantfile_template
         envsubst < ".djengu/env_templates/.env.template.db" > "./env/.env.db";
         envsubst < ".djengu/env_templates/.env.template.dev" > "./env/.env.dev";
         envsubst < ".djengu/env_templates/.env.template.prod" > "./env/.env.prod";
