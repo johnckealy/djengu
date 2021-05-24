@@ -5,7 +5,7 @@ set -euo pipefail
 ########################
 
 
-USERNAME=djenguser
+USERNAME=ubuntu
 
 
 COPY_AUTHORIZED_KEYS_FROM_ROOT=true
