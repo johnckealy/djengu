@@ -43,6 +43,7 @@ services:
         networks:
             - ${DOCKER_NETWORK_NAME}
 
+
     # Nuxt frontend app
     quasar:
         build: ${ROOT_FOLDER}/frontend/

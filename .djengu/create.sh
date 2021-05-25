@@ -94,7 +94,7 @@ export DJANGO_ADMIN_PASSWORD
 export FRONTEND_URL
 export BACKEND_URL
 export SECRET_KEY=`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c45`
-export DJENGU_ROOT=${PWD}
+# export DJENGU_ROOT=${PWD}
 
 while true; do
     read -p "Ready? (Y/n) " yn

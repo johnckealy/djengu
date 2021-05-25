@@ -157,9 +157,13 @@ Because Djengu is decoupled by design, it is possible to host
 several completely independent applications on the same server
 instance. This is done using CaddyServer's built-in reverse-proxy.
 
+This is really useful for running many independent websites on the
+same VPS instance. You could theoretically run a developer's whole
+portfolio of low-traffic websites for $5 a month with this approach.
+
 Everything is controlled from the `Caddyfile`, which will
 install at `/caddy/Caddyfile` in the vagrant VM. You can add
-extra applications and then reference the docker containers.
+extra applications and then reference each docker container.
 The important thing to remember when doing this is to use
 unique port numbers for each instance, and reference these
 port numbers in the `Caddyfile`. In production, you may place the `caddy/`
@@ -168,7 +172,7 @@ application to the same `Caddyfile`.
 
 ## Flavours
 
-Djengu currently has three choices (more will be added as the project progresses):
+Djengu currently has two choices. More will be added as the project progresses.
 
 1) `Basic`: Creates a basic Quasar and Django application.
 
