@@ -4,7 +4,10 @@ set -euo pipefail
 ### SCRIPT VARIABLES ###
 ########################
 
+# NOTE: to run this script manually on a remote machine, you can use:
+# ssh root@<ip-address> "bash -s" < .djengu/.production_toolbox/server_setup.sh
 
+# Change this to any username you like
 USERNAME=ubuntu
 
 
@@ -80,6 +83,30 @@ docker-armageddon() {
     docker rmi -f $(docker images --filter dangling=true -qa)
     docker volume rm $(docker volume ls --filter dangling=true -q)
     docker rmi -f $(docker images -qa)
+}
+
+# Handy function to enter a virtual env by typing "venv"
+function venv {
+    setopt +o nomatch
+    ls -a $PWD/.*/bin/activate > /dev/null 2>&1
+    if [[ $? -eq 0 ]] 
+    then
+        source `ls -a $PWD/.*/bin/activate` > /dev/null 2>&1 
+    else
+        ls -a $PWD/*/bin/activate > /dev/null 2>&1
+    	if [[ $? -eq 0 ]]  
+    	then   
+           source `ls -a $PWD/*/bin/activate` > /dev/null 2>&1  
+        else
+            ls -a $PWD/../.*/bin/activate > /dev/null 2>&1
+            if [[ $? -eq 0 ]]
+                then
+            source `ls -a $PWD/../.*/bin/activate` > /dev/null 2>&1
+            else
+                echo "There is no Virtual Environment in $PWD"
+            fi
+        fi
+    fi
 }
 ' >> /home/"${USERNAME}"/.bashrc
 
