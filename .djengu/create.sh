@@ -34,6 +34,13 @@ then
     echo -e "Please install it before continuing."
     exit
 fi
+if ! which python3.8 &> /dev/null
+then
+    echo -e "${RED}----- python3.8 was not found! ------"
+    echo -e "${NC}Djengu relies on Python 3.8."
+    echo -e "Please install it before continuing."
+    exit
+fi
 
 flavours=("Basic Django/Quasar" "Django/Quasar with JWT Authentication") #"Static Quasar (with SSR)")
 select fav in "${flavours[@]}"; do
