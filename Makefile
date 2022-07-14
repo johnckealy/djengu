@@ -3,7 +3,7 @@ SHELL := /bin/bash
 PYTHON=python3.8
 DJANGO_MANAGE=api/manage.py
 ENV_DIR=.$(PYTHON)_env
-IN_ENV=. $(ENV_DIR)/bin/activate
+IN_ENV=.$(ENV_DIR)/bin/activate
 
 all:
 	@./.djengu/create.sh
